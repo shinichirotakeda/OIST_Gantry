@@ -1,0 +1,29 @@
+#ifndef GeometryPHC_HH
+#define GeometryPHC_HH
+
+#include "globals.hh"
+
+class G4LogicalVolume;
+class G4VPhysicalVolume;
+
+namespace pinholecamerageometry {
+
+class GeometryPHC {
+
+public:
+  GeometryPHC() {};
+  virtual ~GeometryPHC() {};
+  
+  G4LogicalVolume* Construct(std::string detname);
+
+private:
+
+  void DefineMaterials() {};
+  void SetupGeometry() {};
+};
+
+}
+
+#endif
+
+

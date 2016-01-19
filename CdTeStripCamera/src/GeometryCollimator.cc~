@@ -1,0 +1,320 @@
+#include <sstream>
+
+#include "GeometryPinholeCamera.hh"
+
+#include "AHG4MaterialManager.hh"
+
+#include "G4Material.hh"
+#include "G4NistManager.hh"
+#include "G4PVPlacement.hh"
+#include "G4PVParameterised.hh"
+#include "G4LogicalVolume.hh"
+#include "G4VPhysicalVolume.hh"
+#include "G4Box.hh"
+#include "G4Tubs.hh"
+#include "G4Cons.hh"
+#include "G4SubtractionSolid.hh"
+#include "G4RotationMatrix.hh"
+#include "G4VisAttributes.hh"
+#include "G4Colour.hh"
+
+using namespace pinholecamerageometry;
+
+G4LogicalVolume* GeometryPinholeCamera::Construct() {
+
+  const bool surfaceCheck = false;
+  G4double margin = 0.1*mm; 
+
+  AHG4MaterialManager* mmanager = AHG4MaterialManager::GetAHG4MaterialManager();
+  AHG4Material* air = mmanager->instantiate("Vacuum");	
+  std::string matname;
+  AHG4MaterialProperty* p;
+
+  matname = "AHG4SGD.CdTe";
+  p = mmanager->RetrieveProperty("CdTe");
+  mmanager->registerMaterial(matname, *p);
+  AHG4Material* cdte = mmanager->instantiate(matname);
+
+  matname = "AHG4SGD.Aluminium";
+  p = mmanager->RetrieveProperty("Aluminium");
+  mmanager->registerMaterial(matname, *p);
+  AHG4Material* aluminium = mmanager->instantiate(matname);
+
+  matname = "AHG4SGD.Cu";
+  p = mmanager->RetrieveProperty("Cu");
+  mmanager->registerMaterial(matname, *p);
+  AHG4Material* copper = mmanager->instantiate(matname);
+
+
+  // Local World //////////////////////
+  G4double LocalWorld_xSize = 500.0*mm;
+  G4double LocalWorld_ySize = 500.0*mm;
+  G4double LocalWorld_zSize = 500.0*mm;
+  G4VSolid* LocalWorld_Solid = new G4Box("LocalWorld_Solid", LocalWorld_xSize*0.5, LocalWorld_ySize*0.5, LocalWorld_zSize*0.5);
+  G4LogicalVolume* LocalWorld_Logical = new G4LogicalVolume(LocalWorld_Solid, air, "LocalWorld_Logical");
+
+  
+  //==== Duke Watanabe Takeda camera body ========
+  G4double CameraBody_moto_xSize = 166.0*mm;
+  G4double CameraBody_moto_ySize = 197.0*mm;
+  G4double CameraBody_moto_zSize = 40.0*mm;
+  G4VSolid* CameraBody_moto = new G4Box("CameraBody_moto", CameraBody_moto_xSize*0.5, CameraBody_moto_ySize*0.5, CameraBody_moto_zSize*0.5);
+
+
+  //G4double EguriBox_xPos = 83.0*mm;
+  //G4double EguriBox_yPos = 98.5*mm;
+  //G4double EguriBox_zPos = 19.0*mm;
+  G4double EguriBox_xPos = 0.0*mm;
+  G4double EguriBox_yPos = 0.0*mm;
+  G4double EguriBox_zPos = 1.0*mm;
+  G4double EguriBox_xSize = 142.0*mm;
+  G4double EguriBox_ySize = 173.0*mm;
+  G4double EguriBox_zSize = 38.0*mm;
+  G4VSolid* EguriBox = new G4Box("EguriBox", EguriBox_xSize*0.5, EguriBox_ySize*0.5, EguriBox_zSize*0.5);
+
+  G4VSolid* CameraBody = new G4SubtractionSolid("CameraBody", CameraBody_moto, EguriBox, 0, G4ThreeVector( EguriBox_xPos, EguriBox_yPos, EguriBox_zPos));
+  G4LogicalVolume* CameraBody_Logical = new G4LogicalVolume(CameraBody, aluminium, "CameraBody_Logical");
+  
+  G4double CameraBody_xPos = 0.0*mm;
+  G4double CameraBody_yPos = 22.5*mm;
+  G4double CameraBody_zPos = -11.2*mm;
+  new G4PVPlacement(0, G4ThreeVector(CameraBody_xPos, CameraBody_yPos, CameraBody_zPos), CameraBody_Logical, "CameraBody", LocalWorld_Logical, false, 0, surfaceCheck);
+  
+  //==== Duke Watanabe Takeda camera Top late -A- ========
+  G4double CameraTopPlate_A_xSize = 166.0*mm;
+  G4double CameraTopPlate_A_ySize = 197.0*mm;
+  G4double CameraTopPlate_A_zSize = 5.0*mm;
+  G4VSolid* CameraTopPlate_A = new G4Box("CameraTopPlate_A", CameraTopPlate_A_xSize*0.5, CameraTopPlate_A_ySize*0.5, CameraTopPlate_A_zSize*0.5);
+
+  G4double CameraTopPlate_A_hole_xPos = 0.0*mm;
+  G4double CameraTopPlate_A_hole_yPos = -22.5*mm;
+  G4double CameraTopPlate_A_hole_zPos = -0.25*mm;
+  G4double CameraTopPlate_A_hole_xSize = 50.0*mm;
+  G4double CameraTopPlate_A_hole_ySize = 50.0*mm;
+  G4double CameraTopPlate_A_hole_zSize = 4.5*mm;
+  G4VSolid* CameraTopPlate_A_hole = new G4Box("CameraTopPlate_A_hole", CameraTopPlate_A_hole_xSize*0.5, CameraTopPlate_A_hole_ySize*0.5, CameraTopPlate_A_hole_zSize*0.5);
+  
+  G4VSolid* CameraTopPlate_A_processing = new G4SubtractionSolid("CameraTopPlate_A_processing", CameraTopPlate_A, CameraTopPlate_A_hole, 0, G4ThreeVector(CameraTopPlate_A_hole_xPos, CameraTopPlate_A_hole_yPos, CameraTopPlate_A_hole_zPos));
+  G4LogicalVolume* CameraTopPlate_A_processing_Logical = new G4LogicalVolume(CameraTopPlate_A_processing, aluminium, "CameraTopPlate_A_processing_Logical");
+  
+  G4double CameraTopPlate_A_xPos = 0.0*mm;
+  G4double CameraTopPlate_A_yPos = 22.5*mm;
+  G4double CameraTopPlate_A_zPos = 11.3*mm;
+  new G4PVPlacement(0, G4ThreeVector(CameraTopPlate_A_xPos, CameraTopPlate_A_yPos, CameraTopPlate_A_zPos), CameraTopPlate_A_processing_Logical, "CameraTopPlate_A", LocalWorld_Logical, false, 0, surfaceCheck);
+  
+  
+  //==== Duke Watanabe Takeda camera Top late -B- =======
+  G4double CameraTopPlate_B_Rin  = 40.0*mm;
+  G4double CameraTopPlate_B_Rout = 53.0*mm;
+  G4double CameraTopPlate_B_Depth = 1.5*mm;
+  G4double CameraTopPlate_B_Phi_start = 0.0*deg;
+  G4double CameraTopPlate_B_Phi_end = 360.0*deg;
+  G4VSolid* CameraTopPlate_B = new G4Tubs("Tracker_Tube", CameraTopPlate_B_Rin, CameraTopPlate_B_Rout, CameraTopPlate_B_Depth, CameraTopPlate_B_Phi_start, CameraTopPlate_B_Phi_end);
+  G4LogicalVolume* CameraTopPlate_B_Logical = new G4LogicalVolume(CameraTopPlate_B, aluminium, "CameraTopPlate_B_Logical");
+  
+  G4double CameraTopPlate_B_xPos = 0.0*mm;
+  G4double CameraTopPlate_B_yPos = 0.0*mm;
+  G4double CameraTopPlate_B_zPos = 15.3*mm;
+  new G4PVPlacement(0, G4ThreeVector(CameraTopPlate_B_xPos, CameraTopPlate_B_yPos, CameraTopPlate_B_zPos), CameraTopPlate_B_Logical, "CameraTopPlate_B", LocalWorld_Logical, false, 0, surfaceCheck);
+  
+
+  //==== Duke Watanabe Takeda camera mask to detector adapter -dai- =======
+  
+  G4double CameraMaskdDetector_dai_Rin  = 40.0*mm;
+  G4double CameraMaskdDetector_dai_Rout = 53.0*mm;
+  G4double CameraMaskdDetector_dai_Depth = 2.5*mm;
+  G4double CameraMaskdDetector_dai_Phi_start = 0.0*deg;
+  G4double CameraMaskdDetector_dai_Phi_end = 360.0*deg;
+  G4VSolid* CameraMaskdDetector_dai = new G4Tubs("Tracker_Tube", CameraMaskdDetector_dai_Rin, CameraMaskdDetector_dai_Rout, CameraMaskdDetector_dai_Depth, CameraMaskdDetector_dai_Phi_start, CameraMaskdDetector_dai_Phi_end);
+  G4LogicalVolume* CameraMaskdDetector_dai_Logical = new G4LogicalVolume(CameraMaskdDetector_dai, aluminium, "CameraMaskdDetector_dai_Logical");
+  
+  G4double CameraMaskdDetector_dai_xPos = 0.0*mm;
+  G4double CameraMaskdDetector_dai_yPos = 0.0*mm;
+  G4double CameraMaskdDetector_dai_zPos = 19.3*mm;
+  new G4PVPlacement(0, G4ThreeVector(CameraMaskdDetector_dai_xPos, CameraMaskdDetector_dai_yPos, CameraMaskdDetector_dai_zPos), CameraMaskdDetector_dai_Logical, "CameraMaskdDetector_dai", LocalWorld_Logical, false, 0, surfaceCheck);
+  
+
+  
+  // +++ 53.0 +++ long 95.0, middle 55.0, short 35.0
+  //==== Duke Watanabe Takeda camera mask to detector adapter -long- =======
+  
+  G4double CameraMaskdDetector_long_Rin  = 40.0*mm;
+  G4double CameraMaskdDetector_long_Rout = 45.0*mm;
+  G4double CameraMaskdDetector_long_Depth = 47.5*mm;
+  G4double CameraMaskdDetector_long_Phi_start = 0.0*deg;
+  G4double CameraMaskdDetector_long_Phi_end = 360.0*deg;
+  G4VSolid* CameraMaskdDetector_long = new G4Tubs("Tracker_Tube", CameraMaskdDetector_long_Rin, CameraMaskdDetector_long_Rout, CameraMaskdDetector_long_Depth, CameraMaskdDetector_long_Phi_start, CameraMaskdDetector_long_Phi_end);
+  G4LogicalVolume* CameraMaskdDetector_long_Logical = new G4LogicalVolume(CameraMaskdDetector_long, aluminium, "CameraMaskdDetector_long_Logical");
+  
+  G4double CameraMaskdDetector_long_xPos = 0.0*mm;
+  G4double CameraMaskdDetector_long_yPos = 0.0*mm;  
+  G4double CameraMaskdDetector_long_zPos = 69.3*mm;
+  new G4PVPlacement(0, G4ThreeVector(CameraMaskdDetector_long_xPos, CameraMaskdDetector_long_yPos, CameraMaskdDetector_long_zPos), CameraMaskdDetector_long_Logical, "CameraMaskdDetector_long", LocalWorld_Logical, false, 0, surfaceCheck);
+  
+
+  // ++ 148.0 ++ mask adapter 6.0 : have to make squre hole
+  //==== Duke Watanabe Takeda camera mask adapter =======
+
+  
+  G4double CameraMaskAdapter_Rin  = 0.0*mm;
+  G4double CameraMaskAdapter_Rout = 45.0*mm;
+  G4double CameraMaskAdapter_Depth = 2.5*mm;
+  G4double CameraMaskAdapter_Phi_start = 0.0*deg;
+  G4double CameraMaskAdapter_Phi_end = 360.0*deg;
+  G4VSolid* CameraMaskAdapter = new G4Tubs("Tracker_Tube", CameraMaskAdapter_Rin, CameraMaskAdapter_Rout, CameraMaskAdapter_Depth, CameraMaskAdapter_Phi_start, CameraMaskAdapter_Phi_end);
+  
+  G4double CameraMaskAdapter_hole1_xPos = 0.0*mm;
+  G4double CameraMaskAdapter_hole1_yPos = 0.0*mm;
+  G4double CameraMaskAdapter_hole1_zPos = 0.0*mm;
+  G4double CameraMaskAdapter_hole1_xSize = 30.0*mm;
+  G4double CameraMaskAdapter_hole1_ySize = 30.0*mm;
+  G4double CameraMaskAdapter_hole1_zSize = 5.0*mm;
+  G4VSolid* CameraMaskAdapter_hole1 = new G4Box("CameraMaskAdapter_hole1", CameraMaskAdapter_hole1_xSize*0.5, CameraMaskAdapter_hole1_ySize*0.5, CameraMaskAdapter_hole1_zSize*0.5);
+  /*  
+  G4double CameraMaskAdapter_hole2_xPos = 0.0*mm;
+  G4double CameraMaskAdapter_hole2_yPos = 0.0*mm;
+  G4double CameraMaskAdapter_hole2_zPos = 1.5*mm;
+  G4double CameraMaskAdapter_hole2_xSize = 46.8*mm;
+  G4double CameraMaskAdapter_hole2_ySize = 46.8*mm;
+  G4double CameraMaskAdapter_hole2_zSize = 3.0*mm;
+  G4VSolid* CameraMaskAdapter_hole2 = new G4Box("CameraMaskAdapter_hole1", CameraMaskAdapter_hole2_xSize*0.5, CameraMaskAdapter_hole2_ySize*0.5, CameraMaskAdapter_hole2_zSize*0.5);
+  */
+
+
+  //  G4VSolid* CameraMaskAdapter_processing1 = new G4SubtractionSolid("CameraMaskAdapter_processing1", CameraMaskAdapter, CameraMaskAdapter_hole1, 0, G4ThreeVector( CameraMaskAdapter_hole1_xPos, CameraMaskAdapter_hole1_yPos, CameraMaskAdapter_hole1_zPos));
+  //  G4VSolid* CameraMaskAdapter_processing = new G4SubtractionSolid("CameraMaskAdapter_processing", CameraMaskAdapter_processing1, CameraMaskAdapter_hole2, 0, G4ThreeVector( CameraMaskAdapter_hole2_xPos, CameraMaskAdapter_hole2_yPos, CameraMaskAdapter_hole2_zPos));
+  G4VSolid* CameraMaskAdapter_processing = new G4SubtractionSolid("CameraMaskAdapter_processing", CameraMaskAdapter, CameraMaskAdapter_hole1, 0, G4ThreeVector( CameraMaskAdapter_hole1_xPos, CameraMaskAdapter_hole1_yPos, CameraMaskAdapter_hole1_zPos));
+
+
+  G4LogicalVolume* CameraMaskAdapter_processing_Logical = new G4LogicalVolume(CameraMaskAdapter_processing, aluminium, "CameraMaskAdapter_processing_Logical");
+  
+  G4double CameraMaskAdapter_xPos = 0.0*mm;
+  G4double CameraMaskAdapter_yPos = 0.0*mm;
+  G4double CameraMaskAdapter_zPos = 119.3*mm;
+  new G4PVPlacement(0, G4ThreeVector(CameraMaskAdapter_xPos, CameraMaskAdapter_yPos, CameraMaskAdapter_zPos), CameraMaskAdapter_processing_Logical, "CameraMaskAdapter", LocalWorld_Logical, false, 0, surfaceCheck);
+  
+  
+
+
+  // Duke Watanabe Takeda camera AlShield 
+  G4double AlShield_xSize = 45.0*mm;
+  G4double AlShield_ySize = 45.0*mm;
+  G4double AlShield_zSize = 1.0*mm;
+  G4VSolid* AlShield = new G4Box("AlShield", AlShield_xSize*0.5, AlShield_ySize*0.5, AlShield_zSize*0.5);
+
+
+  G4double AlShield_hole_Rin  = 0.0*mm;
+  G4double AlShield_hole_Rout = 1.7*mm;
+  G4double AlShield_hole_Depth = 0.5*mm;
+  G4double AlShield_hole_Phi_start = 0.0*deg;
+  G4double AlShield_hole_Phi_end = 360.0*deg;
+  G4VSolid* AlShield_hole = new G4Tubs("AlShield_hole", AlShield_hole_Rin, AlShield_hole_Rout, AlShield_hole_Depth, AlShield_hole_Phi_start, AlShield_hole_Phi_end);
+ 
+
+  G4VSolid* AlShield_processing = new G4SubtractionSolid("AlShield_processing", AlShield , AlShield_hole, 0, G4ThreeVector(0,0,0));
+  G4LogicalVolume* AlShield_processing_Logical = new G4LogicalVolume(AlShield_processing, aluminium, "AlShield_processing_Logical");
+
+
+  G4double AlShield_xPos = 0.0*mm;
+  G4double AlShield_yPos = 0.0*mm;
+  G4double AlShield_zPos = 122.3*mm;
+  new G4PVPlacement(0, G4ThreeVector(AlShield_xPos, AlShield_yPos, AlShield_zPos), AlShield_processing_Logical, "AlShield", LocalWorld_Logical, false, 0, surfaceCheck);
+
+
+
+  //==== Duke Watanabe Takeda camera pinholemask =======
+
+
+  //  G4double PinholeMask_xPos = 0.0*mm;
+  //  G4double PinholeMask_yPos = 0.0*mm;
+  //  G4double PinholeMask_zPos = 0.0*mm;
+  G4double PinholeMask_xSize = 45.0*mm;
+  G4double PinholeMask_ySize = 45.0*mm;
+  G4double PinholeMask_zSize = 5.0*mm;
+  G4VSolid* PinholeMask = new G4Box("PinholeMask", PinholeMask_xSize*0.5, PinholeMask_ySize*0.5, PinholeMask_zSize*0.5);
+  
+  G4double PinholeMask_hole1_Rmin1 = 0.0*mm; 
+  G4double PinholeMask_hole1_Rmax1 = 1.2*mm; 
+  G4double PinholeMask_hole1_Rmin2 = 0.0*mm; 
+  G4double PinholeMask_hole1_Rmax2 = 0.5*mm; 
+  G4double PinholeMask_hole1_Dz = 1.25*mm; 
+  G4double PinholeMask_hole1_SPhi = 0.0*deg;; 
+  G4double PinholeMask_hole1_DPhi = 360.0*deg;; 
+  G4VSolid* PinholeMask_hole1 = new G4Cons("PinholeMask_hole1", PinholeMask_hole1_Rmin1,PinholeMask_hole1_Rmax1,PinholeMask_hole1_Rmin2,PinholeMask_hole1_Rmax2,PinholeMask_hole1_Dz,PinholeMask_hole1_SPhi,PinholeMask_hole1_DPhi);
+
+
+
+  G4double PinholeMask_hole2_Rmin1 = 0.0*mm; 
+  G4double PinholeMask_hole2_Rmax1 = 0.5*mm; 
+  G4double PinholeMask_hole2_Rmin2 = 0.0*mm; 
+  G4double PinholeMask_hole2_Rmax2 = 1.2*mm; 
+  G4double PinholeMask_hole2_Dz = 1.25*mm; 
+  G4double PinholeMask_hole2_SPhi = 0.0*deg;; 
+  G4double PinholeMask_hole2_DPhi = 360.0*deg;; 
+  G4VSolid* PinholeMask_hole2 = new G4Cons("PinholeMask_hole2", PinholeMask_hole2_Rmin1,PinholeMask_hole2_Rmax1,PinholeMask_hole2_Rmin2,PinholeMask_hole2_Rmax2,PinholeMask_hole2_Dz,PinholeMask_hole2_SPhi,PinholeMask_hole2_DPhi);
+
+
+  G4VSolid*  PinholeMask_processing1 = new G4SubtractionSolid("PinholeMask_processing1",PinholeMask,PinholeMask_hole1, 0, G4ThreeVector(0.,0.,-PinholeMask_hole1_Dz));
+  G4VSolid*  PinholeMask_processing = new G4SubtractionSolid("PinholeMask_processing",PinholeMask_processing1 ,PinholeMask_hole2, 0, G4ThreeVector(0.,0.,PinholeMask_hole2_Dz));
+
+
+
+  G4LogicalVolume* PinholeMask_processing_Logical = new G4LogicalVolume(PinholeMask_processing,copper,"PinholeMask_processing_Logical");
+
+
+  G4double CameraPinholeMask_xPos = 0.0*mm;
+  G4double CameraPinholeMask_yPos = 0.0*mm;
+  G4double CameraPinholeMask_zPos = 125.3*mm;
+  new G4PVPlacement(0, G4ThreeVector(CameraPinholeMask_xPos,CameraPinholeMask_yPos,CameraPinholeMask_zPos),PinholeMask_processing_Logical," CameraPinholeMask",LocalWorld_Logical, false, 0, surfaceCheck);
+
+
+
+  //======= CdTe-Double-sided Strip Ditector  ======
+  G4double CdTe_DSD_xSize = 34.0*mm;
+  G4double CdTe_DSD_ySize = 34.0*mm;
+  G4double CdTe_DSD_zSize = 0.75*mm;
+  G4VSolid* CdTe_DSD = new G4Box("CdTe_DSD", CdTe_DSD_xSize*0.5, CdTe_DSD_ySize*0.5, CdTe_DSD_zSize*0.5);
+  G4LogicalVolume* CdTe_DSD_Logical = new G4LogicalVolume(CdTe_DSD, cdte, "CdTe_DSD_Logical");
+  
+  G4double CdTe_DSD_xPos = 0.0*mm;
+  G4double CdTe_DSD_yPos = 0.0*mm;
+  G4double CdTe_DSD_zPos = 0.0*mm;
+  new G4PVPlacement(0, G4ThreeVector(CdTe_DSD_xPos, CdTe_DSD_yPos, CdTe_DSD_zPos), CdTe_DSD_Logical, "CdTe_DSD", LocalWorld_Logical, false, 0, surfaceCheck);
+
+  // Visualization Attributes //
+  /*
+  G4VisAttributes* DWT_Attributes = new G4VisAttributes(G4Colour::Green());
+  DWT_Attributes->SetForceSolid(true);
+  CameraBody_Logical->SetVisAttributes(DWT_Attributes);
+  CameraTopPlate_A_processing_Logical->SetVisAttributes(DWT_Attributes);
+  CameraTopPlate_B_Logical->SetVisAttributes(DWT_Attributes);
+  CameraMaskdDetector_dai_Logical->SetVisAttributes(DWT_Attributes);
+  CameraMaskdDetector_long_Logical->SetVisAttributes(DWT_Attributes);
+  CameraMaskAdapter_processing_Logical->SetVisAttributes(DWT_Attributes);
+  CameraCodedMask_processing_Logical->SetVisAttributes(DWT_Attributes);
+  */
+
+  //G4VisAttributes* bgo_Attributes = new G4VisAttributes(G4Colour::Green());
+  //bgo_Attributes->SetForceSolid(true);
+  /*
+  BGOTypeA_Logical->SetVisAttributes(bgo_Attributes);
+  BGOTypeB_Logical->SetVisAttributes(bgo_Attributes);
+  BGOTypeC1_Logical->SetVisAttributes(bgo_Attributes);
+  BGOTypeC2_Logical->SetVisAttributes(bgo_Attributes);
+  BGOTypeD1_Logical->SetVisAttributes(bgo_Attributes);
+  BGOTypeD2_Logical->SetVisAttributes(bgo_Attributes);
+  */
+
+  // Visualization Attributes /////////////
+  G4VisAttributes* DWT_Attributes = new G4VisAttributes(G4Colour::Red());
+  DWT_Attributes->SetForceSolid(surfaceCheck);
+  CameraBody_Logical->SetVisAttributes(DWT_Attributes);
+  G4VisAttributes* cdtestrip_Attributes = new G4VisAttributes(G4Colour::Blue());
+  cdtestrip_Attributes->SetForceSolid(surfaceCheck);
+  CdTe_DSD_Logical->SetVisAttributes(cdtestrip_Attributes);
+  
+  return LocalWorld_Logical;
+
+
+
+}

@@ -1,0 +1,70 @@
+#include <sstream>
+
+#include "GeometryPHC.hh"
+#include "GeometryPinholeCamera.hh"
+#include "PHCMark1.hh"
+#include "PHCOrgNoMask.hh"
+#include "PHCOrgPbMask.hh"
+#include "PHCOrgThinAlwindow.hh"
+
+
+#include "AHG4MaterialManager.hh"
+
+#include "G4Material.hh"
+#include "G4NistManager.hh"
+#include "G4PVPlacement.hh"
+#include "G4PVParameterised.hh"
+#include "G4LogicalVolume.hh"
+#include "G4VPhysicalVolume.hh"
+#include "G4Box.hh"
+#include "G4Tubs.hh"
+#include "G4Trap.hh"
+#include "G4SubtractionSolid.hh"
+#include "G4RotationMatrix.hh"
+#include "G4VisAttributes.hh"
+#include "G4Colour.hh"
+
+using namespace pinholecamerageometry;
+
+G4LogicalVolume* GeometryPHC::Construct(std::string detname) {
+
+  const bool surfaceCheck = false;
+
+  G4double margin = 0.1*mm;  
+
+  AHG4MaterialManager* mmanager = AHG4MaterialManager::GetAHG4MaterialManager();
+  AHG4Material* air = mmanager->instantiate("Vacuum");
+
+  // Local World //////////////////////
+  G4double LocalWorld_xSize = 500.0*mm;
+  G4double LocalWorld_ySize = 500.0*mm;
+  G4double LocalWorld_zSize = 500.0*mm;
+  G4VSolid* LocalWorld_Solid = new G4Box("LocalWorld_Solid", LocalWorld_xSize*0.5, LocalWorld_ySize*0.5, LocalWorld_zSize*0.5);
+  G4LogicalVolume* LocalWorld_Logical = new G4LogicalVolume(LocalWorld_Solid, air, "LocalWorld_Logical");
+
+  // Pinhole Camera //////////////////
+
+  GeometryPinholeCamera* PinholeCamera_Geometry;
+  if(detname == "PHCOrg"){
+    PinholeCamera_Geometry = new GeometryPinholeCamera();
+  }else if(detname=="PHCOrgNoMask"){
+    PinholeCamera_Geometry = new PHCOrgNoMask();
+  }else if(detname=="PHCMark1"){
+    PinholeCamera_Geometry = new PHCMark1();
+  }else if(detname=="PHCOrgPbMask"){
+    PinholeCamera_Geometry = new PHCOrgPbMask();
+  }else if(detname=="PHCOrgThinAlwindow"){
+    PinholeCamera_Geometry = new PHCOrgThinAlwindow();
+  }else{    
+    std::cout << "nothing such geometry";    
+  }
+ 
+
+  G4LogicalVolume* PinholeCamera_Logical = PinholeCamera_Geometry->Construct();
+  G4double PinholeCamera_xPos = 0.0*mm;
+  G4double PinholeCamera_yPos = 0.0*mm;
+  G4double PinholeCamera_zPos = 0.0*mm;
+  new G4PVPlacement(0, G4ThreeVector(PinholeCamera_xPos, PinholeCamera_yPos, PinholeCamera_zPos), PinholeCamera_Logical, "PinholeCamera", LocalWorld_Logical, false, 0, surfaceCheck);
+
+  return LocalWorld_Logical;
+}

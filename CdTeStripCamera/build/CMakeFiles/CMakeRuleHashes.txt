@@ -1,0 +1,2 @@
+# Hashes of file build rules.
+b9424737a09c3c6efba5491e0b327a2a ruby/cdTeStripCameraGeometryRUBY_wrap.cxx
