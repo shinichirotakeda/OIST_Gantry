@@ -1,0 +1,2 @@
+/Users/takeda/soft/OIST_Gantry/CdTeStripCamera/build/ruby/CMakeFiles/cdTeStripCameraGeometry.dir
+/Users/takeda/soft/OIST_Gantry/CdTeStripCamera/build/CMakeFiles/CdTeStripCameraGeometry.dir
