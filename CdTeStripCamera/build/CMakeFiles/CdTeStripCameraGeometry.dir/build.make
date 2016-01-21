@@ -225,6 +225,30 @@ CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimator.cc.o.provides: CMa
 CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimator.cc.o.provides.build: CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimator.cc.o
 
 
+CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: CMakeFiles/CdTeStripCameraGeometry.dir/flags.make
+CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: ../src/GeometryCollimatorType1.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/takeda/soft/OIST_Gantry/CdTeStripCamera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o -c /Users/takeda/soft/OIST_Gantry/CdTeStripCamera/src/GeometryCollimatorType1.cc
+
+CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /Users/takeda/soft/OIST_Gantry/CdTeStripCamera/src/GeometryCollimatorType1.cc > CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.i
+
+CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /Users/takeda/soft/OIST_Gantry/CdTeStripCamera/src/GeometryCollimatorType1.cc -o CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.s
+
+CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o.requires:
+
+.PHONY : CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o.requires
+
+CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o.provides: CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o.requires
+	$(MAKE) -f CMakeFiles/CdTeStripCameraGeometry.dir/build.make CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o.provides.build
+.PHONY : CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o.provides
+
+CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o.provides.build: CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o
+
+
 # Object files for target CdTeStripCameraGeometry
 CdTeStripCameraGeometry_OBJECTS = \
 "CMakeFiles/CdTeStripCameraGeometry.dir/src/AHG4ElementHandler.cc.o" \
@@ -233,7 +257,8 @@ CdTeStripCameraGeometry_OBJECTS = \
 "CMakeFiles/CdTeStripCameraGeometry.dir/src/CdTeStripCameraMainGeometry.cc.o" \
 "CMakeFiles/CdTeStripCameraGeometry.dir/src/CdTeStripCameraMainGeometryRealWorld.cc.o" \
 "CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCdTeStripCamera.cc.o" \
-"CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimator.cc.o"
+"CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimator.cc.o" \
+"CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o"
 
 # External object files for target CdTeStripCameraGeometry
 CdTeStripCameraGeometry_EXTERNAL_OBJECTS =
@@ -245,6 +270,7 @@ libCdTeStripCameraGeometry.dylib: CMakeFiles/CdTeStripCameraGeometry.dir/src/CdT
 libCdTeStripCameraGeometry.dylib: CMakeFiles/CdTeStripCameraGeometry.dir/src/CdTeStripCameraMainGeometryRealWorld.cc.o
 libCdTeStripCameraGeometry.dylib: CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCdTeStripCamera.cc.o
 libCdTeStripCameraGeometry.dylib: CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimator.cc.o
+libCdTeStripCameraGeometry.dylib: CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o
 libCdTeStripCameraGeometry.dylib: CMakeFiles/CdTeStripCameraGeometry.dir/build.make
 libCdTeStripCameraGeometry.dylib: /usr/local/geant4/geant4.10.01.p02-install/lib/libG4Tree.dylib
 libCdTeStripCameraGeometry.dylib: /usr/local/geant4/geant4.10.01.p02-install/lib/libG4GMocren.dylib
@@ -283,7 +309,7 @@ libCdTeStripCameraGeometry.dylib: /usr/local/geant4/geant4.10.01.p02-install/lib
 libCdTeStripCameraGeometry.dylib: /usr/local/geant4/geant4.10.01.p02-install/lib/libG4global.dylib
 libCdTeStripCameraGeometry.dylib: /usr/local/geant4/geant4.10.01.p02-install/lib/libG4clhep.dylib
 libCdTeStripCameraGeometry.dylib: CMakeFiles/CdTeStripCameraGeometry.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/takeda/soft/OIST_Gantry/CdTeStripCamera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX shared library libCdTeStripCameraGeometry.dylib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/takeda/soft/OIST_Gantry/CdTeStripCamera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX shared library libCdTeStripCameraGeometry.dylib"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CdTeStripCameraGeometry.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -298,6 +324,7 @@ CMakeFiles/CdTeStripCameraGeometry.dir/requires: CMakeFiles/CdTeStripCameraGeome
 CMakeFiles/CdTeStripCameraGeometry.dir/requires: CMakeFiles/CdTeStripCameraGeometry.dir/src/CdTeStripCameraMainGeometryRealWorld.cc.o.requires
 CMakeFiles/CdTeStripCameraGeometry.dir/requires: CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCdTeStripCamera.cc.o.requires
 CMakeFiles/CdTeStripCameraGeometry.dir/requires: CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimator.cc.o.requires
+CMakeFiles/CdTeStripCameraGeometry.dir/requires: CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o.requires
 
 .PHONY : CMakeFiles/CdTeStripCameraGeometry.dir/requires
 

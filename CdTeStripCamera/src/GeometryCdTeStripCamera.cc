@@ -4,6 +4,7 @@
 #include "AHG4MaterialManager.hh"
 
 #include "GeometryCollimator.hh"
+#include "GeometryCollimatorType1.hh"
 
 #include "G4Material.hh"
 #include "G4NistManager.hh"
@@ -75,8 +76,7 @@ G4LogicalVolume* GeometryCdTeStripCamera::Construct(std::string detname) {
 
   GeometryCollimator* Collimator_Geometry;
   if(detname == "Type1"){
-    Collimator_Geometry = new GeometryCollimator();
-    //    Collimator_Geometry = new CollimatorType1();
+    Collimator_Geometry = new GeometryCollimatorType1();
   }else{
     Collimator_Geometry = new GeometryCollimator();
   }

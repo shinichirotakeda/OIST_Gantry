@@ -10,7 +10,7 @@ def run_simulation(num, random)
   energy = 30.0 # keV
   posx = 0.0 #cm
   posy = 0.0 #cm
-  posz = 10 #cm
+  posz = 5.5 #cm
 
   dirx = 0.0
   diry = 0.0
@@ -50,7 +50,7 @@ def run_simulation(num, random)
 end
 
 ### main ###
-num = 100
+num = 10
 run_id = 0
 random = run_id
 run_simulation(num, random)

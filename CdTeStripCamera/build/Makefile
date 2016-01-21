@@ -369,6 +369,33 @@ src/GeometryCollimator.cc.s:
 	$(MAKE) -f CMakeFiles/CdTeStripCameraGeometry.dir/build.make CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimator.cc.s
 .PHONY : src/GeometryCollimator.cc.s
 
+src/GeometryCollimatorType1.o: src/GeometryCollimatorType1.cc.o
+
+.PHONY : src/GeometryCollimatorType1.o
+
+# target to build an object file
+src/GeometryCollimatorType1.cc.o:
+	$(MAKE) -f CMakeFiles/CdTeStripCameraGeometry.dir/build.make CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o
+.PHONY : src/GeometryCollimatorType1.cc.o
+
+src/GeometryCollimatorType1.i: src/GeometryCollimatorType1.cc.i
+
+.PHONY : src/GeometryCollimatorType1.i
+
+# target to preprocess a source file
+src/GeometryCollimatorType1.cc.i:
+	$(MAKE) -f CMakeFiles/CdTeStripCameraGeometry.dir/build.make CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.i
+.PHONY : src/GeometryCollimatorType1.cc.i
+
+src/GeometryCollimatorType1.s: src/GeometryCollimatorType1.cc.s
+
+.PHONY : src/GeometryCollimatorType1.s
+
+# target to generate assembly for a file
+src/GeometryCollimatorType1.cc.s:
+	$(MAKE) -f CMakeFiles/CdTeStripCameraGeometry.dir/build.make CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.s
+.PHONY : src/GeometryCollimatorType1.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -404,6 +431,9 @@ help:
 	@echo "... src/GeometryCollimator.o"
 	@echo "... src/GeometryCollimator.i"
 	@echo "... src/GeometryCollimator.s"
+	@echo "... src/GeometryCollimatorType1.o"
+	@echo "... src/GeometryCollimatorType1.i"
+	@echo "... src/GeometryCollimatorType1.s"
 .PHONY : help
 
 

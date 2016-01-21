@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/takeda/soft/OIST_Gantry/CdTeStripCamera/src/CdTeStripCameraMainGeometryRealWorld.cc" "/Users/takeda/soft/OIST_Gantry/CdTeStripCamera/build/CMakeFiles/CdTeStripCameraGeometry.dir/src/CdTeStripCameraMainGeometryRealWorld.cc.o"
   "/Users/takeda/soft/OIST_Gantry/CdTeStripCamera/src/GeometryCdTeStripCamera.cc" "/Users/takeda/soft/OIST_Gantry/CdTeStripCamera/build/CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCdTeStripCamera.cc.o"
   "/Users/takeda/soft/OIST_Gantry/CdTeStripCamera/src/GeometryCollimator.cc" "/Users/takeda/soft/OIST_Gantry/CdTeStripCamera/build/CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimator.cc.o"
+  "/Users/takeda/soft/OIST_Gantry/CdTeStripCamera/src/GeometryCollimatorType1.cc" "/Users/takeda/soft/OIST_Gantry/CdTeStripCamera/build/CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "Clang")
 
