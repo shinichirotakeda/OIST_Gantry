@@ -400,6 +400,17 @@ void AHG4MaterialManager::registerKnownMaterials()
     registerMaterial(name, AHG4MaterialProperty(density, c));
     }
     *==============*/
+
+  {
+    name = "W";
+    density = 19.25 * g/cm3;
+    NC c;
+    c["W"] = 1;
+    registerMaterial(name, AHG4MaterialProperty(density, c));
+    name = "Tungsten";
+    registerMaterial(name, AHG4MaterialProperty(density, c));
+  }
+  
 }
 
 

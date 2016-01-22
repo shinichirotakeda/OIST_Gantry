@@ -55,6 +55,7 @@ namespace {
     a["Ba"] = new G4Element("Barium",    "Ba", 56, 137.327     *Z);
     a["Ce"] = new G4Element("Cerium",    "Ce", 58, 140.115     *Z);
     a["Gd"] = new G4Element("Gadolinium","Gd", 64, 157.25      *Z);
+    a["W"] =  new G4Element("Tungsten",  "W",  74, 183.84      *Z);
     a["Pt"] = new G4Element("Platinum",  "Pt", 78, 195.078     *Z);
     a["Au"] = new G4Element("Gold",      "Au", 79, 196.96654   *Z);
     a["Hg"] = new G4Element("Hydrargentum","Hg",80, 200.59      *Z);

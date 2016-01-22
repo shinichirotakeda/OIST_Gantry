@@ -12,10 +12,10 @@ def run_simulation(num, random)
   posy = 0.0 #cm
   posz = 5.5 #cm
 
-  dirx = 0.0
-  diry = 0.0
+  dirx = 0
+  diry = 0
   dirz = -1.0
-  thetamax = 0.1
+  thetamax = 0.5
   output = "vis_ene#{energy}_posx#{posx}cm_posy#{posy}cm_poz#{posz}cm_seed#{random}.root"
 
   sim = ComptonSoft::Simulation.new
@@ -50,7 +50,7 @@ def run_simulation(num, random)
 end
 
 ### main ###
-num = 10
+num = 300
 run_id = 0
 random = run_id
 run_simulation(num, random)

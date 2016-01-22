@@ -14,8 +14,8 @@
         <offsetx>1.0</offsetx><offsety>1.0</offsety>
       </geometry>
       <pixel>
-        <numx>128</numx><numy>128</numy>
-        <pitchx>0.25</pitchx><pitchy>0.25</pitchy>
+        <numx>256</numx><numy>256</numy>
+        <pitchx>0.125</pitchx><pitchy>0.125</pitchy>
       </pixel>
       <position><x>0.0</x><y>0.0</y><z>0.0</z></position>
       <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>

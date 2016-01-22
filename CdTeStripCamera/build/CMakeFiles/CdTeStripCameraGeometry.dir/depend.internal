@@ -1578,6 +1578,7 @@ CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o
  /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4ExceptionSeverity.hh
  /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4Exp.hh
  /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4GeomSplitter.hh
+ /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4IntersectionSolid.hh
  /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4IonisParamElm.hh
  /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4IonisParamMat.hh
  /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4Isotope.hh
@@ -1624,6 +1625,7 @@ CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o
  /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4UCons.hh
  /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4USolid.hh
  /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4UTubs.hh
+ /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4UnionSolid.hh
  /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4VPhysicalVolume.hh
  /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4VPhysicalVolume.icc
  /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4VSolid.hh

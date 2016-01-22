@@ -1577,6 +1577,7 @@ CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/lo
 CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4ExceptionSeverity.hh
 CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4Exp.hh
 CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4GeomSplitter.hh
+CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4IntersectionSolid.hh
 CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4IonisParamElm.hh
 CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4IonisParamMat.hh
 CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4Isotope.hh
@@ -1623,6 +1624,7 @@ CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/lo
 CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4UCons.hh
 CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4USolid.hh
 CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4UTubs.hh
+CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4UnionSolid.hh
 CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4VPhysicalVolume.hh
 CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4VPhysicalVolume.icc
 CMakeFiles/CdTeStripCameraGeometry.dir/src/GeometryCollimatorType1.cc.o: /usr/local/geant4/geant4.10.01.p02-install/include/Geant4/G4VSolid.hh
