@@ -31,7 +31,7 @@ def run_simulation(num, random)
   sim.set_physics(hadron_hp: false, cut_value: 0.001)
 
   sim.set_geometry :CdTeStripCameraMainGeometry, {
-    "Collimator Name" => "Type1",
+    "Collimator Name" => "Type2",
   }  
   
   sim.set_primary_generator :PointSourcePrimaryGen, {
@@ -44,13 +44,18 @@ def run_simulation(num, random)
     theta_min: 0.0,
     theta_max: thetamax,
   }
-  
-  sim.visualize(mode: 'OGLSQt')
+
+
+#  sim.visualize(mode: 'HepRepFile')
+  sim.visualize(mode: 'OGLIQt')
+#  sim.visualize(mode: 'DAWNFILE')
+#  sim.visualize(mode: 'OGL')
+#  sim.visualize(mode: 'OGLSQt')
   sim.run(num)
 end
 
 ### main ###
-num = 300
+num = 10
 run_id = 0
 random = run_id
 run_simulation(num, random)
