@@ -44,18 +44,13 @@ def run_simulation(num, random)
     theta_min: 0.0,
     theta_max: thetamax,
   }
-
-
-#  sim.visualize(mode: 'HepRepFile')
-  sim.visualize(mode: 'OGLIQt')
-#  sim.visualize(mode: 'DAWNFILE')
-#  sim.visualize(mode: 'OGL')
-#  sim.visualize(mode: 'OGLSQt')
+  
+  sim.visualize(mode: 'OGLSQt')
   sim.run(num)
 end
 
 ### main ###
-num = 10
+num = 0
 run_id = 0
 random = run_id
 run_simulation(num, random)

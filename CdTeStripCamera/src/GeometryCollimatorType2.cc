@@ -131,20 +131,17 @@ G4LogicalVolume* GeometryCollimatorType2::Construct(G4ThreeVector *pos) {
 
   G4SubtractionSolid *a1 = new G4SubtractionSolid("a1",Collimator_Solid,Pinhole,G4Transform3D(rot_p1, p1));
   G4SubtractionSolid *a2 = new G4SubtractionSolid("a2",a1,Pinhole,G4Transform3D(rot_p2, p2));
-  G4LogicalVolume* Collimator_Logical = new G4LogicalVolume(a2, tungsten, "Collimator_Logical");
-  //  new G4PVPlacement(G4Transform3D(rot_p1, p1), Pinhole_logical, "PinholeCollimatorP1", Collimator_Logical, false, 0, surfaceCheck);
-  //  new G4PVPlacement(G4Transform3D(rot_p2, p2), Pinhole_logical, "PinholeCollimatorP2", Collimator_Logical, false, 0, surfaceCheck);
-  //  new G4PVPlacement(G4Transform3D(rot_p3, p3), Pinhole_logical, "PinholeCollimatorP3", Collimator_Logical, false, 0, surfaceCheck);
-  //  new G4PVPlacement(G4Transform3D(rot_p4, p4), Pinhole_logical, "PinholeCollimatorP4", Collimator_Logical, false, 0, surfaceCheck);
-  //  new G4PVPlacement(G4Transform3D(rot_p5, p5), Pinhole_logical, "PinholeCollimatorP5", Collimator_Logical, false, 0, surfaceCheck);
-  //  new G4PVPlacement(G4Transform3D(rot_p6, p6), Pinhole_logical, "PinholeCollimatorP6", Collimator_Logical, false, 0, surfaceCheck);
-  //  new G4PVPlacement(G4Transform3D(rot_p7, p7), Pinhole_logical, "PinholeCollimatorP7", Collimator_Logical, false, 0, surfaceCheck);
-  //  new G4PVPlacement(G4Transform3D(rot_p8, p8), Pinhole_logical, "PinholeCollimatorP8", Collimator_Logical, false, 0, surfaceCheck);
-  //  new G4PVPlacement(G4Transform3D(rot_p9, p9), Pinhole_logical, "PinholeCollimatorP9", Collimator_Logical, false, 0, surfaceCheck);
-  
+  G4SubtractionSolid *a3 = new G4SubtractionSolid("a3",a2,Pinhole,G4Transform3D(rot_p3, p3));
+  G4SubtractionSolid *a4 = new G4SubtractionSolid("a4",a3,Pinhole,G4Transform3D(rot_p4, p4));
+  G4SubtractionSolid *a5 = new G4SubtractionSolid("a5",a4,Pinhole,G4Transform3D(rot_p5, p5));
+  G4SubtractionSolid *a6 = new G4SubtractionSolid("a6",a5,Pinhole,G4Transform3D(rot_p6, p6));
+  G4SubtractionSolid *a7 = new G4SubtractionSolid("a7",a6,Pinhole,G4Transform3D(rot_p7, p7));
+  G4SubtractionSolid *a8 = new G4SubtractionSolid("a8",a7,Pinhole,G4Transform3D(rot_p8, p8));
+  G4SubtractionSolid *a9 = new G4SubtractionSolid("a9",a8,Pinhole,G4Transform3D(rot_p9, p9));
+  G4LogicalVolume* Collimator_Logical = new G4LogicalVolume(a9, tungsten, "Collimator_Logical");
   
   G4VisAttributes* Collimator_Attributes = new G4VisAttributes(G4Colour::Red());
-  Collimator_Attributes->SetForceSolid(surfaceCheck);
+  Collimator_Attributes->SetForceSolid(true);  
   Collimator_Logical->SetVisAttributes(Collimator_Attributes);
   
   pos->setX(0.);
