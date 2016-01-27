@@ -1,6 +1,6 @@
 #include <sstream>
 
-#include "GeometryCollimatorType1.hh"
+#include "GeometryCollimator_MuonType1.hh"
 
 #include "AHG4MaterialManager.hh"
 
@@ -23,7 +23,7 @@
 
 using namespace cdtestripcamerageometry;
 
-G4LogicalVolume* GeometryCollimatorType1::Construct(G4ThreeVector *pos) {
+G4LogicalVolume* GeometryCollimator_MuonType1::Construct(G4ThreeVector *pos) {
 
   const bool surfaceCheck = false;
   G4double margin = 0.1*mm; 
@@ -41,16 +41,16 @@ G4LogicalVolume* GeometryCollimatorType1::Construct(G4ThreeVector *pos) {
 
   // Collimator //////////////////////
 
-  G4double Collimator_xSize = 20.0*mm;
-  G4double Collimator_ySize = 20.0*mm;
-  G4double Collimator_zSize = 10.0*mm;
+  G4double Collimator_xSize = 34.0*mm;
+  G4double Collimator_ySize = 34.0*mm;
+  G4double Collimator_zSize = 8.0*mm;
   G4VSolid* Collimator_Solid = new G4Box("Collimator_Solid", Collimator_xSize*0.5, Collimator_ySize*0.5, Collimator_zSize*0.5);
   G4LogicalVolume* Collimator_Logical = new G4LogicalVolume(Collimator_Solid, tungsten, "Collimator_Logical");
 
   G4double PinholeCone_Rmin1 = 0.0*mm; 
-  G4double PinholeCone_Rmax1 = 0.05*mm; 
+  G4double PinholeCone_Rmax1 = 0.5*mm; 
   G4double PinholeCone_Rmin2 = 0.0*mm; 
-  G4double PinholeCone_Rmax2 = 1.6*mm; 
+  G4double PinholeCone_Rmax2 = 0.8*mm; 
   G4double PinholeCone_Dz = 4.0*mm; 
   G4double PinholeCone_SPhi = 0.0*deg;; 
   G4double PinholeCone_DPhi = 360.0*deg;; 
@@ -69,16 +69,16 @@ G4LogicalVolume* GeometryCollimatorType1::Construct(G4ThreeVector *pos) {
   G4IntersectionSolid *Pinhole= new G4IntersectionSolid("Pinhole",box_Solid,Pinhole_shape,0,G4ThreeVector(0,0,PinholeCone_Dz));
   G4LogicalVolume* Pinhole_logical = new G4LogicalVolume(Pinhole, air, "Pinhole_Logical");
 
-  G4ThreeVector p1(-5.45*mm,5.45*mm,0);
-  G4ThreeVector p2(0,5.45*mm,0);
-  G4ThreeVector p3(5.45*mm,5.45*mm,0);
-  G4ThreeVector p4(-5.45*mm,0,0);
+  G4ThreeVector p1(-7.5*mm,7.5*mm,0);
+  G4ThreeVector p2(0,7.5*mm,0);
+  G4ThreeVector p3(7.5*mm,7.5*mm,0);
+  G4ThreeVector p4(-7.5*mm,0,0);
   G4ThreeVector p5(0,0,0);
-  G4ThreeVector p6(5.45*mm,0,0);
-  G4ThreeVector p7(-5.45*mm,-5.45*mm,0);
-  G4ThreeVector p8(0,-5.45*mm,0);
-  G4ThreeVector p9(5.45*mm,-5.45*mm,0);
-  G4ThreeVector pf(0,0,25.*mm);
+  G4ThreeVector p6(7.5*mm,0,0);
+  G4ThreeVector p7(-7.5*mm,-7.5*mm,0);
+  G4ThreeVector p8(0,-7.5*mm,0);
+  G4ThreeVector p9(7.5*mm,-7.5*mm,0);
+  G4ThreeVector pf(0,0,100.*mm);
   G4ThreeVector zaxis(0,0,1);
   G4ThreeVector axis;
 
@@ -148,7 +148,7 @@ G4LogicalVolume* GeometryCollimatorType1::Construct(G4ThreeVector *pos) {
   
   pos->setX(0.);
   pos->setY(0.);
-  pos->setZ(30.0*mm);
+  pos->setZ(60.0*mm);
   return Collimator_Logical;
  
 }

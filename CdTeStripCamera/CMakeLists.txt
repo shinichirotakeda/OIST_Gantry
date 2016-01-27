@@ -73,6 +73,7 @@ add_library(${TARGET_LIBRARY} SHARED
   src/GeometryCollimator.cc
   src/GeometryCollimatorType1.cc
   src/GeometryCollimatorType2.cc
+  src/GeometryCollimator_MuonType1.cc
   )
 
 message("--- ANLG4_LIB ${ANLG4_LIB}")
