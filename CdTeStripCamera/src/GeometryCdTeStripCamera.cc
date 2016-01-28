@@ -7,6 +7,7 @@
 #include "GeometryCollimatorType1.hh"
 #include "GeometryCollimatorType2.hh"
 #include "GeometryCollimator_MuonType1.hh"
+#include "GeometryCollimator_MuonType2.hh"
 
 #include "G4Material.hh"
 #include "G4NistManager.hh"
@@ -83,6 +84,8 @@ G4LogicalVolume* GeometryCdTeStripCamera::Construct(std::string detname) {
     Collimator_Geometry = new GeometryCollimatorType2();
   }else if(detname == "MuonType1"){
     Collimator_Geometry = new GeometryCollimator_MuonType1();
+  }else if(detname == "MuonType2"){
+    Collimator_Geometry = new GeometryCollimator_MuonType2();
   }else{
     Collimator_Geometry = new GeometryCollimator();
   }

@@ -6,4 +6,5 @@ namespace cdtestripcamerageometry {
   class GeometryCollimatorType1;
   class GeometryCollimatorType2;
   class GeometryCollimator_MuonType1;
+  class GeometryCollimator_MuonType2;
 }

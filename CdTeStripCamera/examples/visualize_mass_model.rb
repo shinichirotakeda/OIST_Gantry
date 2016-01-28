@@ -32,7 +32,7 @@ def run_simulation(num, random)
   sim.set_physics(hadron_hp: false, cut_value: 0.001)
 
   sim.set_geometry :CdTeStripCameraMainGeometry, {
-    "Collimator Name" => "MuonType1",
+    "Collimator Name" => "MuonType2",
   }  
   
   sim.set_primary_generator :PointSourcePrimaryGen, {
