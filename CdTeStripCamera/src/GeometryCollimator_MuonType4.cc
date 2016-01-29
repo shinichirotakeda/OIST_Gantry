@@ -41,10 +41,9 @@ G4LogicalVolume* GeometryCollimator_MuonType4::Construct(G4ThreeVector *pos) {
 
   // Collimator //////////////////////
 
-  G4double Collimator_xSize = 34.0*mm;
-  G4double Collimator_ySize = 34.0*mm;
+  G4double Collimator_rmax = 38.0*mm;
   G4double Collimator_zSize = 8.0*mm;
-  G4VSolid* Collimator_Solid = new G4Box("Collimator_Solid", Collimator_xSize*0.5, Collimator_ySize*0.5, Collimator_zSize*0.5);
+  G4VSolid* Collimator_Solid = new G4Tubs("Collimator_Solid", 0, Collimator_rmax, Collimator_zSize*0.5,0.0*deg,360.0*deg);
   G4LogicalVolume* Collimator_Logical = new G4LogicalVolume(Collimator_Solid, tungsten, "Collimator_Logical");
 
   G4double PinholeCone_Rmin1 = 0.0*mm; 

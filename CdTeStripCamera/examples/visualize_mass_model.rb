@@ -8,7 +8,7 @@ include CdTeStripCameraGeometry
 
 def run_simulation(num, random)
   energy = 30.0 # keV
-  posx = 1.0 #cm
+  posx = 2.0 #cm
   posy = 0.0 #cm
   posz = 16.8 #cm
 
@@ -16,7 +16,7 @@ def run_simulation(num, random)
   diry = 0
   dirz = -1.0
 #  thetamax = 0.5
-  thetamax = 0.25
+  thetamax = 0.4
   output = "vis_ene#{energy}_posx#{posx}cm_posy#{posy}cm_poz#{posz}cm_seed#{random}.root"
 
   sim = ComptonSoft::Simulation.new
@@ -51,7 +51,7 @@ def run_simulation(num, random)
 end
 
 ### main ###
-num = 0
+num = 300
 run_id = 0
 random = run_id
 run_simulation(num, random)
