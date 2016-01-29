@@ -10,7 +10,7 @@ def run_simulation(num, random)
   energy = 30.0 # keV
   posx = 1.0 #cm
   posy = 0.0 #cm
-  posz = 16.0 #cm
+  posz = 16.8 #cm
 
   dirx = 0
   diry = 0
@@ -32,7 +32,7 @@ def run_simulation(num, random)
   sim.set_physics(hadron_hp: false, cut_value: 0.001)
 
   sim.set_geometry :CdTeStripCameraMainGeometry, {
-    "Collimator Name" => "MuonType2",
+    "Collimator Name" => "MuonType3",
   }  
   
   sim.set_primary_generator :PointSourcePrimaryGen, {
