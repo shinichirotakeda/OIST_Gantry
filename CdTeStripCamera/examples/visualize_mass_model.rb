@@ -7,7 +7,7 @@ require 'cdTeStripCameraGeometry'
 include CdTeStripCameraGeometry
 
 def run_simulation(num, random)
-  energy = 30.0 # keV
+  energy = 31.5 # keV
   posx = 2.0 #cm
   posy = 0.0 #cm
   posz = 16.8 #cm
@@ -32,7 +32,7 @@ def run_simulation(num, random)
   sim.set_physics(hadron_hp: false, cut_value: 0.001)
 
   sim.set_geometry :CdTeStripCameraMainGeometry, {
-    "Collimator Name" => "MuonType4",
+    "Collimator Name" => "MuonType5",
   }  
   
   sim.set_primary_generator :PointSourcePrimaryGen, {
