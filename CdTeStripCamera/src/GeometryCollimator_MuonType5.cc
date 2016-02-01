@@ -49,7 +49,7 @@ G4LogicalVolume* GeometryCollimator_MuonType5::Construct(G4ThreeVector *pos) {
   G4double PinholeCone_Rmin1 = 0.0*mm; 
   G4double PinholeCone_Rmax1 = 0.5*mm; 
   G4double PinholeCone_Rmin2 = 0.0*mm; 
-  G4double PinholeCone_Rmax2 = 0.7625*mm; 
+  G4double PinholeCone_Rmax2 = 0.875*mm; 
   G4double PinholeCone_Dz = 7.5*mm; 
   G4double PinholeCone_SPhi = 0.0*deg;; 
   G4double PinholeCone_DPhi = 360.0*deg;; 
