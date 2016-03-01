@@ -4,6 +4,10 @@ CdTeStripCamera/build/
 CdTeStripCamera/examples/*.root
 CdTeStripCamera/examples/*_seed_I.txt
 CdTeStripCamera/examples/*_seed_F.txt
+Gantry/build/
+Gantry/examples/*.root
+Gantry/examples/*_seed_I.txt
+Gantry/examples/*_seed_F.txt
 *_summary.txt
 *_volume.txt
 *.log

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="http://www.astro.isas.jaxa.jp/~odaka/xmlstyle/detector_config_v3.xsl" ?>
+
+<configuration>
+  <name>OIST_Gantry</name>
+  <comment>S. Takeda | 2016-2-26</comment>
+  <length_unit>mm</length_unit>
+  <detectors>
+    <detector id="100">
+      <type>2DStrip</type>
+      <name>CdTeStrip:00</name>
+      <geometry>
+        <widthx>36.5</widthx><widthy>36.5</widthy><thickness>0.75</thickness>
+        <offsetx>3.5</offsetx><offsety>3.5</offsety>
+      </geometry>
+      <pixel>
+        <numx>128</numx><numy>128</numy>
+        <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
+      </pixel>
+      <position><x>-1.25</x><y>-5.0</y><z>-49.625</z></position>
+      <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
+      <direction_yaxis><x>0.0</x><y>+1.0</y><z>0.0</z></direction_yaxis>
+      <energy_priority>anode</energy_priority> 
+    </detector>
+    <detector id="101">
+      <type>2DStrip</type>
+      <name>CdTeStrip:01</name>
+      <geometry>
+        <widthx>36.5</widthx><widthy>36.5</widthy><thickness>0.75</thickness>
+        <offsetx>3.5</offsetx><offsety>3.5</offsety>
+      </geometry>
+      <pixel>
+        <numx>128</numx><numy>128</numy>
+        <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
+      </pixel>
+      <position><x>-1.25</x><y>-38.6257</y><z>-31.5546</z></position>
+      <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
+      <direction_yaxis><x>0.0</x><y>+0.707107</y><z>-0.707107</z></direction_yaxis>
+      <energy_priority>anode</energy_priority> 
+    </detector>
+    <detector id="102">
+      <type>2DStrip</type>
+      <name>CdTeStrip:02</name>
+      <geometry>
+        <widthx>36.5</widthx><widthy>36.5</widthy><thickness>0.75</thickness>
+        <offsetx>3.5</offsetx><offsety>3.5</offsety>
+      </geometry>
+      <pixel>
+        <numx>128</numx><numy>128</numy>
+        <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
+      </pixel>
+      <position><x>-1.25</x><y>-49.625</y><z>5.0</z></position>
+      <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
+      <direction_yaxis><x>0.0</x><y>0.0</y><z>-1.0</z></direction_yaxis>
+      <energy_priority>anode</energy_priority> 
+    </detector>
+    <detector id="103">
+      <type>2DStrip</type>
+      <name>CdTeStrip:03</name>
+      <geometry>
+        <widthx>36.5</widthx><widthy>36.5</widthy><thickness>0.75</thickness>
+        <offsetx>3.5</offsetx><offsety>3.5</offsety>
+      </geometry>
+      <pixel>
+        <numx>128</numx><numy>128</numy>
+        <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
+      </pixel>
+      <position><x>-1.25</x><y>-31.5546</y><z>38.6257</z></position>
+      <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
+      <direction_yaxis><x>0.0</x><y>-0.707107</y><z>-0.707107</z></direction_yaxis>
+      <energy_priority>anode</energy_priority> 
+    </detector>    
+    <detector id="104">
+      <type>2DStrip</type>
+      <name>CdTeStrip:04</name>
+      <geometry>
+        <widthx>36.5</widthx><widthy>36.5</widthy><thickness>0.75</thickness>
+        <offsetx>3.5</offsetx><offsety>3.5</offsety>
+      </geometry>
+      <pixel>
+        <numx>128</numx><numy>128</numy>
+        <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
+      </pixel>
+      <position><x>-1.25</x><y>5.0</y><z>49.625</z></position>
+      <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
+      <direction_yaxis><x>0.0</x><y>-1.0</y><z>0.0</z></direction_yaxis>
+      <energy_priority>anode</energy_priority> 
+    </detector>        
+    <detector id="105">
+      <type>2DStrip</type>
+      <name>CdTeStrip:05</name>
+      <geometry>
+        <widthx>36.5</widthx><widthy>36.5</widthy><thickness>0.75</thickness>
+        <offsetx>3.5</offsetx><offsety>3.5</offsety>
+      </geometry>
+      <pixel>
+        <numx>128</numx><numy>128</numy>
+        <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
+      </pixel>
+      <position><x>-1.25</x><y>38.6257</y><z>31.5546</z></position>
+      <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
+      <direction_yaxis><x>0.0</x><y>-0.707107</y><z>0.707107</z></direction_yaxis>
+      <energy_priority>anode</energy_priority> 
+    </detector>   
+    <detector id="106">
+      <type>2DStrip</type>
+      <name>CdTeStrip:06</name>
+      <geometry>
+        <widthx>36.5</widthx><widthy>36.5</widthy><thickness>0.75</thickness>
+        <offsetx>3.5</offsetx><offsety>3.5</offsety>
+      </geometry>
+      <pixel>
+        <numx>128</numx><numy>128</numy>
+        <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
+      </pixel>
+      <position><x>-1.25</x><y>49.625</y><z>-5.0</z></position>
+      <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
+      <direction_yaxis><x>0.0</x><y>0.0</y><z>+1.0</z></direction_yaxis>
+      <energy_priority>anode</energy_priority> 
+    </detector>    
+    <detector id="107">
+      <type>2DStrip</type>
+      <name>CdTeStrip:07</name>
+      <geometry>
+        <widthx>36.5</widthx><widthy>36.5</widthy><thickness>0.75</thickness>
+        <offsetx>3.5</offsetx><offsety>3.5</offsety>
+      </geometry>
+      <pixel>
+        <numx>128</numx><numy>128</numy>
+        <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
+      </pixel>
+      <position><x>-1.25</x><y>31.5546</y><z>-38.6257</z></position>
+      <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
+      <direction_yaxis><x>0.0</x><y>0.707107</y><z>0.707107</z></direction_yaxis>
+      <energy_priority>anode</energy_priority> 
+    </detector> 
+    
+  </detectors>
+  
+  <readout />
+
+  <groups>
+    <group name="HighZ">
+      <detector id="100" />
+      <detector id="101" />
+      <detector id="102" />
+      <detector id="103" />
+      <detector id="104" />
+      <detector id="105" />
+      <detector id="106" />
+      <detector id="107" />
+    </group>
+    <group name="CdTe">
+      <detector id="100" />
+      <detector id="101" />
+      <detector id="102" />
+      <detector id="103" />
+      <detector id="104" />
+      <detector id="105" />
+      <detector id="106" />
+      <detector id="107" />
+    </group>
+  </groups>
+</configuration>
