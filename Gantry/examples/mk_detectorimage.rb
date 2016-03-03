@@ -14,7 +14,7 @@ include OISTapp
 hittreefiles = Dir.glob("ht*.root")
 imagefile = "image.root"
 
-detector_config = "../database/detector_configuration.xml"
+detector_config = "./database/detector_configuration.xml"
 
 anl = ANL::ANLApp.new
 anl.chain :CSHitCollection
