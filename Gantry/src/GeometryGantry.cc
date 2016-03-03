@@ -192,7 +192,7 @@ G4LogicalVolume* GeometryGantry::Construct(std::string detname) {
     new G4PVPlacement(G4Transform3D(rot,pos), Asic_Logical, name, DetectorModule_Logical, false, 0, surfaceCheck);
   }
 
-
+  
   G4double DetectorModule_xPos = -(CdTe_DSD_xPos+1.25*mm);
   G4double DetectorModule_yPos = -CdTe_DSD_yPos-5.0*mm;
   G4double DetectorModule_zPos = -50.0*mm - ((FECHolder_zSize + Ceramic_Spacer_zSize + FecKiban_zSize) -DetectorModule_zSize*0.5);

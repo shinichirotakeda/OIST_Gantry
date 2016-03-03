@@ -74,7 +74,7 @@ G4LogicalVolume* GeometryCollimatorType1::Construct(G4LogicalVolume* localworld)
   G4IntersectionSolid *Pinhole= new G4IntersectionSolid("Pinhole",box_Solid,Pinhole_shape,0,G4ThreeVector(0,0,PinholeCone_Dz*0.5));
 
 
-  G4double pinholepitch = 5.45*mm;
+  G4double pinholepitch = 5.5*mm;
   G4ThreeVector p1(-pinholepitch,pinholepitch,0);
   G4ThreeVector p2(0,pinholepitch,0);
   G4ThreeVector p3(pinholepitch,pinholepitch,0);
@@ -231,15 +231,15 @@ G4LogicalVolume* GeometryCollimatorType1::Construct(G4LogicalVolume* localworld)
   //  G4LogicalVolume* Collimator_Logical = new G4LogicalVolume(a9, tungsten, "Collimator_Logical");
   G4LogicalVolume* Collimator_Logical = new G4LogicalVolume(a21, tungsten, "Collimator_Logical");
 
-
+  G4double angleoffset = std::atan(3.75/50.);
   G4double Collimator_xPos = 0.0*mm;
   G4double Collimator_yPos = 0.0*mm;
   G4double Collimator_zPos = -25.0*mm;
   for (int i = 0; i < 8; i++) {    
     G4ThreeVector pos = G4ThreeVector(Collimator_xPos,Collimator_yPos,Collimator_zPos);
     G4RotationMatrix rot = G4RotationMatrix();
-    rot.rotateX(-45.0*deg*i);
-    pos.rotateX(-45.0*deg*i);
+    rot.rotateX(-45.0*deg*i - angleoffset);
+    pos.rotateX(-45.0*deg*i - angleoffset);
     sprintf(name, "Collimator%02d", i);
     new G4PVPlacement(G4Transform3D(rot,pos), Collimator_Logical, name, localworld, false, 0, surfaceCheck);
   }
@@ -264,8 +264,8 @@ G4LogicalVolume* GeometryCollimatorType1::Construct(G4LogicalVolume* localworld)
   for (int i = 0; i < 8; i++) {    
     G4ThreeVector pos = G4ThreeVector(PbShield_xPos,PbShield_yPos,PbShield_zPos);
     G4RotationMatrix rot = G4RotationMatrix();
-    rot.rotateX(-45.0*deg*i);
-    pos.rotateX(-45.0*deg*i);
+    rot.rotateX(-45.0*deg*i - angleoffset);
+    pos.rotateX(-45.0*deg*i - angleoffset);
     sprintf(name, "PbShield1_%02d", i);
     new G4PVPlacement(G4Transform3D(rot,pos), PbShield_Logical, name, localworld, false, 0, surfaceCheck);
   }
@@ -277,8 +277,8 @@ G4LogicalVolume* GeometryCollimatorType1::Construct(G4LogicalVolume* localworld)
   for (int i = 0; i < 8; i++) {    
     G4ThreeVector pos = G4ThreeVector(PbShield_xPos,PbShield_yPos,PbShield_zPos);
     G4RotationMatrix rot = G4RotationMatrix();
-    rot.rotateX(-45.0*deg*i);
-    pos.rotateX(-45.0*deg*i);
+    rot.rotateX(-45.0*deg*i - angleoffset);
+    pos.rotateX(-45.0*deg*i - angleoffset);
     sprintf(name, "PbShield2_%02d", i);
     new G4PVPlacement(G4Transform3D(rot,pos), PbShield_Logical, name, localworld, false, 0, surfaceCheck);
   }
