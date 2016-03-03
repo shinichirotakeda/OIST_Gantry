@@ -14,7 +14,7 @@ def run_simulation(num, random)
   dirx = 0.0
   diry = 0.0
   dirz = -1.0
-  thetamax = 1.5
+#  thetamax = 3.2; #radian
   output = "ht_ene#{energy}_posx#{posx}cm_posy#{posy}cm_poz#{posz}cm_seed#{random}.root"
     
   sim = ComptonSoft::Simulation.new
@@ -29,7 +29,7 @@ def run_simulation(num, random)
   sim.set_physics(hadron_hp: false, cut_value: 0.001)
 
   sim.set_geometry :GantryMainGeometry, {
-    "Collimator Name" => "NULL",
+    "Collimator Name" => "Type1",
   }  
   sim.set_primary_generator :PointSourcePrimaryGen, {
     particle: "gamma",
@@ -38,16 +38,17 @@ def run_simulation(num, random)
     energy_max: energy,
     position: vec(posx, posy, posz),
     direction: vec(dirx, diry, dirz),
-    theta_min: 0.0,
-    theta_max: thetamax,
+#    theta_min: 0.0,
+#    theta_max: thetamax,
   }
 
+#  sim.visualize(mode: 'OGLSQt')
   sim.run(num)
 end
 
 ### main ###
 
-num = 1000000
+num = 10000000
 run_id = 0
 random = run_id
 run_simulation(num, random)

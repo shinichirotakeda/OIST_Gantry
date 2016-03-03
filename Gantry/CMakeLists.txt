@@ -71,6 +71,7 @@ add_library(${TARGET_LIBRARY} SHARED
   src/GantryMainGeometryRealWorld.cc
   src/GeometryGantry.cc
   src/GeometryCollimator.cc
+  src/GeometryCollimatorType1.cc
   )
 
 message("--- ANLG4_LIB ${ANLG4_LIB}")

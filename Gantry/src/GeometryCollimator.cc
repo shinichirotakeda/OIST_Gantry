@@ -20,7 +20,7 @@
 
 using namespace oistgantry;
 
-G4LogicalVolume* GeometryCollimator::Construct(G4ThreeVector *pos) {
+G4LogicalVolume* GeometryCollimator::Construct(G4LogicalVolume* localworld) {
 
   const bool surfaceCheck = false;
   G4double margin = 0.1*mm; 
@@ -29,19 +29,7 @@ G4LogicalVolume* GeometryCollimator::Construct(G4ThreeVector *pos) {
   AHG4Material* air = mmanager->instantiate("Vacuum");	
  
   // Null Collimator //////////////////////
-  G4double Collimator_xSize = 10.0*mm;
-  G4double Collimator_ySize = 10.0*mm;
-  G4double Collimator_zSize = 10.0*mm;
-  G4VSolid* Collimator_Solid = new G4Box("Collimator_Solid", Collimator_xSize*0.5, Collimator_ySize*0.5, Collimator_zSize*0.5);
-  G4LogicalVolume* Collimator_Logical = new G4LogicalVolume(Collimator_Solid, air, "Collimator_Logical");
 
-  G4VisAttributes* Collimator_Attributes = new G4VisAttributes(0.0,G4Colour::Red());
-  Collimator_Attributes->SetForceSolid(surfaceCheck);
-  Collimator_Logical->SetVisAttributes(Collimator_Attributes);
-  
-  pos->setX(0.);
-  pos->setY(0.);
-  pos->setZ(0.0*mm);
-  return Collimator_Logical;
+  return localworld;
  
 }

@@ -4,6 +4,7 @@
 #include "AHG4MaterialManager.hh"
 
 #include "GeometryCollimator.hh"
+#include "GeometryCollimatorType1.hh"
 
 #include "G4Material.hh"
 #include "G4NistManager.hh"
@@ -265,8 +266,8 @@ G4LogicalVolume* GeometryGantry::Construct(std::string detname) {
   G4double ColdPlate3_zPos = -ColdPlate2org_xSize + ColdPlate3_zSize*0.5;
 
   
-  new G4PVPlacement(endring_rot, G4ThreeVector(ColdPlate1_xPos,ColdPlate1_yPos,ColdPlate1_zPos),ColdPlate1_Logical, "ColdPlate1_1", LocalWorld_Logical, false, 0, surfaceCheck);
-  new G4PVPlacement(endring_rot, G4ThreeVector(ColdPlate2_xPos,ColdPlate2_yPos,ColdPlate2_zPos),ColdPlate2_Logical, "ColdPlate2_1", LocalWorld_Logical, false, 0, surfaceCheck);
+  new G4PVPlacement(endring_rot, G4ThreeVector(ColdPlate1_xPos,ColdPlate1_yPos,ColdPlate1_zPos),ColdPlate1_Logical, "ColdPlate1", LocalWorld_Logical, false, 0, surfaceCheck);
+  new G4PVPlacement(endring_rot, G4ThreeVector(ColdPlate2_xPos,ColdPlate2_yPos,ColdPlate2_zPos),ColdPlate2_Logical, "ColdPlate2", LocalWorld_Logical, false, 0, surfaceCheck);
   new G4PVPlacement(0, G4ThreeVector(ColdPlate3_xPos,ColdPlate3_yPos,ColdPlate3_zPos),ColdPlate3_Logical, "ColdPlate3", LocalWorld_Logical, false, 0, surfaceCheck);
 
   // Cold Plate Support (Delrin) & Base Frame
@@ -386,7 +387,7 @@ G4LogicalVolume* GeometryGantry::Construct(std::string detname) {
   G4double AlPipe1_Phimax = 80.0*mm;
   G4double AlPipe1_zSize = (-BePipe_zSize*0.5-(Flange1_xPos-Flange_org_zSize*0.5));
   G4VSolid* AlPipe1 = new G4Tubs("AlPipe1", AlPipe1_Phimin*0.5,AlPipe1_Phimax*0.5,AlPipe1_zSize*0.5,0.0*deg,360.0*deg);
-  G4LogicalVolume* AlPipe1_Logical = new G4LogicalVolume(AlPipe1, beryllium, "AlPipe1_Logical");
+  G4LogicalVolume* AlPipe1_Logical = new G4LogicalVolume(AlPipe1, aluminium, "AlPipe1_Logical");
 
   G4double AlPipe1_xPos = (Flange1_xPos-Flange_org_zSize*0.5)+AlPipe1_zSize*0.5;
   G4double AlPipe1_yPos = 0.0*mm;
@@ -398,7 +399,7 @@ G4LogicalVolume* GeometryGantry::Construct(std::string detname) {
   G4double AlPipe2_Phimax = 80.0*mm;
   G4double AlPipe2_zSize = Flange2_xPos+Flange_org_zSize*0.5 - BePipe_zSize*0.5;
   G4VSolid* AlPipe2 = new G4Tubs("AlPipe2", AlPipe2_Phimin*0.5,AlPipe2_Phimax*0.5,AlPipe2_zSize*0.5,0.0*deg,360.0*deg);
-  G4LogicalVolume* AlPipe2_Logical = new G4LogicalVolume(AlPipe2, beryllium, "AlPipe2_Logical");
+  G4LogicalVolume* AlPipe2_Logical = new G4LogicalVolume(AlPipe2, aluminium, "AlPipe2_Logical");
 
   G4double AlPipe2_xPos = (Flange2_xPos+Flange_org_zSize*0.5)-AlPipe2_zSize*0.5;
   G4double AlPipe2_yPos = 0.0*mm;
@@ -412,7 +413,7 @@ G4LogicalVolume* GeometryGantry::Construct(std::string detname) {
   G4double SmallFlange_Phimax = 120.0*mm;
   G4double SmallFlange_zSize = 10.0*mm;
   G4VSolid* SmallFlange = new G4Tubs("SmallFlange", SmallFlange_Phimin*0.5,SmallFlange_Phimax*0.5,SmallFlange_zSize*0.5,0.0*deg,360.0*deg);
-  G4LogicalVolume* SmallFlange_Logical = new G4LogicalVolume(SmallFlange, beryllium, "SmallFlange_Logical");
+  G4LogicalVolume* SmallFlange_Logical = new G4LogicalVolume(SmallFlange, aluminium, "SmallFlange_Logical");
 
   G4double SmallFlange1_xPos = (Flange1_xPos-Flange_org_zSize*0.5)-SmallFlange_zSize*0.5;
   G4double SmallFlange1_yPos = 0.0*mm;
@@ -560,7 +561,7 @@ G4LogicalVolume* GeometryGantry::Construct(std::string detname) {
   LocalWorld_Logical->SetVisAttributes(LocalWorld_Attributes);
 
   G4VisAttributes* bepipe_Attributes = new G4VisAttributes(); 
-  bepipe_Attributes->SetColor(0.0,1.0,1.0,0.5); //cyan
+  bepipe_Attributes->SetColor(1.0,1.0,1.0,0.5); 
   bepipe_Attributes->SetForceSolid(true);
   //bepipe_Attributes->SetForceWireframe(true);
   BePipe_Logical->SetVisAttributes(bepipe_Attributes);
@@ -573,18 +574,19 @@ G4LogicalVolume* GeometryGantry::Construct(std::string detname) {
   AlPipe1_Logical->SetVisAttributes(alpipe_Attributes);
   AlPipe2_Logical->SetVisAttributes(alpipe_Attributes);
   SmallFlange_Logical->SetVisAttributes(alpipe_Attributes);
-  //======= Collimator  ======
 
+
+
+
+  //======= Collimator  ======
   GeometryCollimator* Collimator_Geometry;
   if(detname == "Type1"){
-    Collimator_Geometry = new GeometryCollimator();
+    Collimator_Geometry = new GeometryCollimatorType1();
   }else{
     Collimator_Geometry = new GeometryCollimator();
   }
 
-  G4ThreeVector Collimator_postion = G4ThreeVector(0,0,0);  
-  G4LogicalVolume* Collimator_Logical = Collimator_Geometry->Construct(&Collimator_postion);
-  new G4PVPlacement(0, Collimator_postion, Collimator_Logical, "Collimator", LocalWorld_Logical, false, 0, surfaceCheck);
+  Collimator_Geometry->Construct(LocalWorld_Logical);
 
   return LocalWorld_Logical;
 }

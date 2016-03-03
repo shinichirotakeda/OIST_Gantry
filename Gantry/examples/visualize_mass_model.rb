@@ -32,7 +32,7 @@ def run_simulation(num, random)
   sim.set_physics(hadron_hp: false, cut_value: 0.001)
 
   sim.set_geometry :GantryMainGeometry, {
-    "Collimator Name" => "NULL",
+    "Collimator Name" => "Type1",
   }  
   
   sim.set_primary_generator :PointSourcePrimaryGen, {
@@ -51,7 +51,7 @@ def run_simulation(num, random)
 end
 
 ### main ###
-num = 0
+num = 1
 run_id = 0
 random = run_id
 run_simulation(num, random)

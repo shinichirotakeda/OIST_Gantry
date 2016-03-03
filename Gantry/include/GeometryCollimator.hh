@@ -15,7 +15,7 @@ public:
   GeometryCollimator() {};
   virtual ~GeometryCollimator() {};
   
-  virtual G4LogicalVolume* Construct(G4ThreeVector *pos);
+  virtual G4LogicalVolume* Construct(G4LogicalVolume* localworld);
 
 private:
 
