@@ -51,7 +51,7 @@ def run_simulation(num, random)
 end
 
 ### main ###
-num = 1
+num = 0
 run_id = 0
 random = run_id
 run_simulation(num, random)

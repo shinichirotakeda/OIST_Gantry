@@ -14,10 +14,10 @@
         <offsetx>1.0</offsetx><offsety>1.0</offsety>
       </geometry>
       <pixel>
-        <numx>256</numx><numy>256</numy>
-        <pitchx>0.125</pitchx><pitchy>0.125</pitchy>
+        <numx>128</numx><numy>128</numy>
+        <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
       </pixel>
-      <position><x>0.0</x><y>0.0</y><z>0.0</z></position>
+      <position><x>0.0</x><y>0.0</y><z>-0.375</z></position>
       <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
       <direction_yaxis><x>0.0</x><y>+1.0</y><z>0.0</z></direction_yaxis>
       <energy_priority>anode</energy_priority> 

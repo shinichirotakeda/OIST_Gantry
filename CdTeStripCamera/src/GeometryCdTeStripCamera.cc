@@ -6,6 +6,7 @@
 #include "GeometryCollimator.hh"
 #include "GeometryCollimatorType1.hh"
 #include "GeometryCollimatorType2.hh"
+#include "GeometryCollimatorPrototype.hh"
 #include "GeometryCollimator_MuonType1.hh"
 #include "GeometryCollimator_MuonType2.hh"
 #include "GeometryCollimator_MuonType3.hh"
@@ -72,7 +73,7 @@ G4LogicalVolume* GeometryCdTeStripCamera::Construct(std::string detname) {
   
   G4double CdTe_DSD_xPos = 0.0*mm;
   G4double CdTe_DSD_yPos = 0.0*mm;
-  G4double CdTe_DSD_zPos = 0.0*mm;
+  G4double CdTe_DSD_zPos = 0.0*mm - 0.5*CdTe_DSD_zSize;
   new G4PVPlacement(0, G4ThreeVector(CdTe_DSD_xPos, CdTe_DSD_yPos, CdTe_DSD_zPos), CdTe_DSD_Logical, "CdTe_DSD", LocalWorld_Logical, false, 0, surfaceCheck);
 
   G4VisAttributes* cdtestrip_Attributes = new G4VisAttributes(G4Colour::Blue());
@@ -98,6 +99,8 @@ G4LogicalVolume* GeometryCdTeStripCamera::Construct(std::string detname) {
     Collimator_Geometry = new GeometryCollimator_MuonType5();
   }else if(detname == "MuonType6"){
     Collimator_Geometry = new GeometryCollimator_MuonType6();
+  }else if(detname == "Prototype"){
+    Collimator_Geometry = new GeometryCollimatorPrototype();
   }else{
     Collimator_Geometry = new GeometryCollimator();
   }

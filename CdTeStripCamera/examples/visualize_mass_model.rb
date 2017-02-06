@@ -10,7 +10,7 @@ def run_simulation(num, random)
   energy = 31.5 # keV
   posx = 0.0 #cm
   posy = 0.0 #cm
-  posz = 16.8 #cm
+  posz = 5.0 #cm
 
   dirx = 0
   diry = 0
@@ -22,7 +22,7 @@ def run_simulation(num, random)
   sim = ComptonSoft::Simulation.new
   sim.output = output
   sim.random_seed = random
-  sim.verbose = 0
+  sim.verbose = 1
 
   sim.detector_config = "database/detector_configuration.xml"
   sim.simulation_param = "database/simulation_parameters.xml"
@@ -32,11 +32,11 @@ def run_simulation(num, random)
   sim.set_physics(hadron_hp: false, cut_value: 0.001)
 
   sim.set_geometry :CdTeStripCameraMainGeometry, {
-    "Collimator Name" => "MuonType5",
+    "Collimator Name" => "Prototype",
   }  
   
   sim.set_primary_generator :PointSourcePrimaryGen, {
-    particle: "gamma",
+    particle: "geantino",
     photon_index: 0.0,
     energy_min: energy,
     energy_max: energy,
