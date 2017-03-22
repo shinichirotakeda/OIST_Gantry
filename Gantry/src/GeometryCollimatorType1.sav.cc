@@ -46,14 +46,8 @@ G4LogicalVolume* GeometryCollimatorType1::Construct(G4LogicalVolume* localworld)
   p = mmanager->RetrieveProperty("Pb");
   mmanager->registerMaterial(matname, *p);
   AHG4Material* pb = mmanager->instantiate(matname);
-
-  matname = "AHG4SGD.Aluminium";
-  p = mmanager->RetrieveProperty("Aluminium");
-  mmanager->registerMaterial(matname, *p);
-  AHG4Material* aluminium = mmanager->instantiate(matname);
-
   
-  // Collimator Core //////////////////////
+  // Collimator //////////////////////
 
   G4double Collimator_surface_distance = 22.5*mm;
   G4double Collimator_segment_angle = 45.0*degree;
@@ -251,71 +245,56 @@ G4LogicalVolume* GeometryCollimatorType1::Construct(G4LogicalVolume* localworld)
   }
   
 
-  // Collimator Support //////////////////////
+  // Pb Pipe //////////////////////
 
-  G4RotationMatrix *shield_rot = new G4RotationMatrix();
-  shield_rot->rotateY(90.0*deg);
-  
-  G4double WShield_Phimin = 58.0*mm;
-  G4double WShield_Phimax = 73.5*mm;
-  G4double WShield_zSize = 75.0*mm;
-  G4VSolid* WShield = new G4Tubs("WShield", WShield_Phimin*0.5,WShield_Phimax*0.5,WShield_zSize*0.5,0.0*deg,360.0*deg);
+  G4double PbShield_surface_distance = 22.5*mm;
+  G4double PbShield_segment_angle = 45.0*degree;
+  G4double PbShield_zSize = 5.0*mm;
+  G4double PbShield_xSize1 = 75.0*mm;
+  G4double PbShield_xSize2 = PbShield_xSize1;
+  G4double PbShield_ySize1 = 2.0*(PbShield_surface_distance+PbShield_zSize)*std::tan(PbShield_segment_angle*0.5);
+  G4double PbShield_ySize2 = 2.0*PbShield_surface_distance*std::tan(PbShield_segment_angle*0.5);
+  G4VSolid* PbShield_Solid = new G4Trd("PbShield_Solid", PbShield_xSize1*0.5, PbShield_xSize2*0.5, PbShield_ySize1*0.5, PbShield_ySize2*0.5, PbShield_zSize*0.5);
+  G4LogicalVolume* PbShield_Logical = new G4LogicalVolume(PbShield_Solid, pb, "PbShield_Logical");
 
-  G4LogicalVolume* WShield1_Logical = new G4LogicalVolume(WShield, tungsten, "WShield_Logical");
-  G4double WShield1_xPos = 0.5*Collimator_xSize1 + 0.5*WShield_zSize;
-  G4double WShield1_yPos = 0.0*mm;
-  G4double WShield1_zPos = 0.0*mm;
-  new G4PVPlacement(shield_rot, G4ThreeVector(WShield1_xPos,WShield1_yPos,WShield1_zPos), WShield1_Logical, "WSheild1", localworld, false, 0, surfaceCheck);
+
+  G4double PbShield_xPos = Collimator_xPos + Collimator_xSize1*0.5 + PbShield_xSize1*0.5;
+  G4double PbShield_yPos = 0.0*mm;
+  G4double PbShield_zPos = -25.0*mm;
+  for (int i = 0; i < 8; i++) {    
+    G4ThreeVector pos = G4ThreeVector(PbShield_xPos,PbShield_yPos,PbShield_zPos);
+    G4RotationMatrix rot = G4RotationMatrix();
+    rot.rotateX(-45.0*deg*i - angleoffset);
+    pos.rotateX(-45.0*deg*i - angleoffset);
+    sprintf(name, "PbShield1_%02d", i);
+    new G4PVPlacement(G4Transform3D(rot,pos), PbShield_Logical, name, localworld, false, 0, surfaceCheck);
+  }
+
+
+  PbShield_xPos = Collimator_xPos - Collimator_xSize1*0.5 - PbShield_xSize1*0.5;
+  PbShield_yPos = 0.0*mm;
+  PbShield_zPos = -25.0*mm;
+  for (int i = 0; i < 8; i++) {    
+    G4ThreeVector pos = G4ThreeVector(PbShield_xPos,PbShield_yPos,PbShield_zPos);
+    G4RotationMatrix rot = G4RotationMatrix();
+    rot.rotateX(-45.0*deg*i - angleoffset);
+    pos.rotateX(-45.0*deg*i - angleoffset);
+    sprintf(name, "PbShield2_%02d", i);
+    new G4PVPlacement(G4Transform3D(rot,pos), PbShield_Logical, name, localworld, false, 0, surfaceCheck);
+  }
+
  
-  G4LogicalVolume* WShield2_Logical = new G4LogicalVolume(WShield, tungsten, "WShield_Logical");  
-  G4double WShield2_xPos = -0.5*Collimator_xSize1 - 0.5*WShield_zSize;
-  G4double WShield2_yPos = 0.0*mm;
-  G4double WShield2_zPos = 0.0*mm;
-  new G4PVPlacement(shield_rot, G4ThreeVector(WShield2_xPos,WShield2_yPos,WShield2_zPos), WShield2_Logical, "WSheild2", localworld, false, 0, surfaceCheck);
-
-  G4double Alsupport_Phimin = 58.0*mm;
-  G4double Alsupport_Phimax = 73.5*mm;
-  G4double Alsupport_zSize = 125.7*mm - (0.5*Collimator_xSize1 + WShield_zSize) + 14.0*mm;
-  G4VSolid* Alsupport = new G4Tubs("Alsupport", Alsupport_Phimin*0.5,Alsupport_Phimax*0.5,Alsupport_zSize*0.5,0.0*deg,360.0*deg);
-  G4LogicalVolume* Alsupport_Logical = new G4LogicalVolume(Alsupport, aluminium, "Alsupport_Logical");
-  G4double Alsupport_xPos = 0.5*Collimator_xSize1 + WShield_zSize + 0.5*Alsupport_zSize;
-  G4double Alsupport_yPos = 0.0*mm;
-  G4double Alsupport_zPos = 0.0*mm;
-  new G4PVPlacement(shield_rot, G4ThreeVector(Alsupport_xPos,Alsupport_yPos,Alsupport_zPos), Alsupport_Logical, "Alsupport", localworld, false, 0, surfaceCheck);
-  
-
-  G4double Alflange_Phimin = 73.5*mm;
-  G4double Alflange_Phimax = 152.0*mm;
-  G4double Alflange_zSize = 14.0*mm;
-  G4VSolid* Alflange = new G4Tubs("Alflange", Alflange_Phimin*0.5,Alflange_Phimax*0.5,Alflange_zSize*0.5,0.0*deg,360.0*deg);
-  G4LogicalVolume* Alflange_Logical = new G4LogicalVolume(Alflange, aluminium, "Alflange_Logical");
-  G4double Alflange_xPos = 0.5*Collimator_xSize1 + WShield_zSize + Alsupport_zSize - 0.5*Alflange_zSize;
-  G4double Alflange_yPos = 0.0*mm;
-  G4double Alflange_zPos = 0.0*mm;
-  new G4PVPlacement(shield_rot, G4ThreeVector(Alflange_xPos,Alflange_yPos,Alflange_zPos), Alflange_Logical, "Alflange", localworld, false, 0, surfaceCheck);
-
-  
-  
   G4VisAttributes* Collimator_Attributes = new G4VisAttributes(G4Colour::Red());
   Collimator_Attributes->SetColor(1.0,0.0,1.0,0.5); //magenta
   Collimator_Attributes->SetForceSolid(true);
   //Collimator_Attributes->SetForceWireframe(true);
   Collimator_Logical->SetVisAttributes(Collimator_Attributes);
 
-  G4VisAttributes* WShield_Attributes = new G4VisAttributes(G4Colour::Red());
-  WShield_Attributes->SetColor(1.0,0.0,1.0,0.25);
-  WShield_Attributes->SetForceSolid(true);
+  G4VisAttributes* PbShield_Attributes = new G4VisAttributes(G4Colour::Red());
+  PbShield_Attributes->SetColor(1.0,1.0,1.0,0.5);
+  PbShield_Attributes->SetForceSolid(true);
   //PbShield_Attributes->SetForceWireframe(true);
-  WShield1_Logical->SetVisAttributes(WShield_Attributes);
-  WShield2_Logical->SetVisAttributes(WShield_Attributes);
-
-  G4VisAttributes* Alsupport_Attributes = new G4VisAttributes(G4Colour::Red());
-  Alsupport_Attributes->SetColor(0.0,0.0,1.0,0.2);
-  Alsupport_Attributes->SetForceSolid(true);
-  //PbShield_Attributes->SetForceWireframe(true);
-  Alsupport_Logical->SetVisAttributes(Alsupport_Attributes);
-  Alflange_Logical->SetVisAttributes(Alsupport_Attributes);
-
+  PbShield_Logical->SetVisAttributes(PbShield_Attributes);
 
 
   return localworld;
