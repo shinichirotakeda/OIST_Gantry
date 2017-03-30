@@ -7,8 +7,8 @@ void calforconf(){
   int id = 7;
   
   double orgposx = -1.25;
-  double orgposy = -5.0;
-  double orgposz = -50.0+0.75/2.;
+  double orgposy = -5.0 - 1.25;
+  double orgposz = -48.0-0.75/2.;
   double angle = -TMath::Pi()/180.*(45.*id); 
 
   TVector3 orgvec(orgposx,orgposy,orgposz);

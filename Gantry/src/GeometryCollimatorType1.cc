@@ -237,7 +237,7 @@ G4LogicalVolume* GeometryCollimatorType1::Construct(G4LogicalVolume* localworld)
   //  G4LogicalVolume* Collimator_Logical = new G4LogicalVolume(a9, tungsten, "Collimator_Logical");
   G4LogicalVolume* Collimator_Logical = new G4LogicalVolume(a21, tungsten, "Collimator_Logical");
 
-  G4double angleoffset = std::atan(3.75/50.);
+  G4double angleoffset = std::atan(5.0/48.);
   G4double Collimator_xPos = 0.0*mm;
   G4double Collimator_yPos = 0.0*mm;
   G4double Collimator_zPos = -25.0*mm;

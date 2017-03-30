@@ -9,12 +9,12 @@ include OISTGantryGeometry
 def run_simulation(num, random)
   energy = 31.5 # keV
   posx = 0.0 #cm
-  posy = 5.0 #cm
+  posy = 0.0 #cm
   posz = 0.0 #cm
 
-  dirx = 1.0
-  diry = 0
-  dirz = 0.0
+  dirx = 0.0
+  diry = 0.0
+  dirz = -1.0
 #  thetamax = 0.5
   thetamax = 0.0
   output = "vis_ene#{energy}_posx#{posx}cm_posy#{posy}cm_poz#{posz}cm_seed#{random}.root"
@@ -51,7 +51,7 @@ def run_simulation(num, random)
 end
 
 ### main ###
-num = 0
+num = 1
 run_id = 0
 random = run_id
 run_simulation(num, random)

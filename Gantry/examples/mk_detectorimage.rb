@@ -11,7 +11,7 @@ include OISTapp
 #hittreefiles = Dir.glob( "hittree.root" )
 #comptreefile = ARGV[0]
 
-hittreefiles = Dir.glob("ht*.root")
+hittreefiles = Dir.glob("ht_ene27.4_*.root")
 imagefile = "image.root"
 
 detector_config = "./database/detector_configuration.xml"

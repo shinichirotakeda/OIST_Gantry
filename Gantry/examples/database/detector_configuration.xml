@@ -17,7 +17,7 @@
         <numx>128</numx><numy>128</numy>
         <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
       </pixel>
-      <position><x>-1.25</x><y>-5.0</y><z>-49.625</z></position>
+      <position><x>-1.25</x><y>-6.25</y><z>-48.375</z></position>
       <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
       <direction_yaxis><x>0.0</x><y>+1.0</y><z>0.0</z></direction_yaxis>
       <energy_priority>anode</energy_priority> 
@@ -33,7 +33,7 @@
         <numx>128</numx><numy>128</numy>
         <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
       </pixel>
-      <position><x>-1.25</x><y>-38.6257</y><z>-31.5546</z></position>
+      <position><x>-1.25</x><y>-38.6257</y><z>-29.7869</z></position>
       <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
       <direction_yaxis><x>0.0</x><y>+0.707107</y><z>-0.707107</z></direction_yaxis>
       <energy_priority>anode</energy_priority> 
@@ -49,7 +49,7 @@
         <numx>128</numx><numy>128</numy>
         <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
       </pixel>
-      <position><x>-1.25</x><y>-49.625</y><z>5.0</z></position>
+      <position><x>-1.25</x><y>-48.375</y><z>6.25</z></position>
       <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
       <direction_yaxis><x>0.0</x><y>0.0</y><z>-1.0</z></direction_yaxis>
       <energy_priority>anode</energy_priority> 
@@ -65,7 +65,7 @@
         <numx>128</numx><numy>128</numy>
         <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
       </pixel>
-      <position><x>-1.25</x><y>-31.5546</y><z>38.6257</z></position>
+      <position><x>-1.25</x><y>-29.7869</y><z>38.6257</z></position>
       <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
       <direction_yaxis><x>0.0</x><y>-0.707107</y><z>-0.707107</z></direction_yaxis>
       <energy_priority>anode</energy_priority> 
@@ -81,7 +81,7 @@
         <numx>128</numx><numy>128</numy>
         <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
       </pixel>
-      <position><x>-1.25</x><y>5.0</y><z>49.625</z></position>
+      <position><x>-1.25</x><y>6.25</y><z>48.375</z></position>
       <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
       <direction_yaxis><x>0.0</x><y>-1.0</y><z>0.0</z></direction_yaxis>
       <energy_priority>anode</energy_priority> 
@@ -97,7 +97,7 @@
         <numx>128</numx><numy>128</numy>
         <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
       </pixel>
-      <position><x>-1.25</x><y>38.6257</y><z>31.5546</z></position>
+      <position><x>-1.25</x><y>38.6257</y><z>29.7869</z></position>
       <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
       <direction_yaxis><x>0.0</x><y>-0.707107</y><z>0.707107</z></direction_yaxis>
       <energy_priority>anode</energy_priority> 
@@ -113,7 +113,7 @@
         <numx>128</numx><numy>128</numy>
         <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
       </pixel>
-      <position><x>-1.25</x><y>49.625</y><z>-5.0</z></position>
+      <position><x>-1.25</x><y>48.375</y><z>-6.25</z></position>
       <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
       <direction_yaxis><x>0.0</x><y>0.0</y><z>+1.0</z></direction_yaxis>
       <energy_priority>anode</energy_priority> 
@@ -129,7 +129,7 @@
         <numx>128</numx><numy>128</numy>
         <pitchx>0.250</pitchx><pitchy>0.250</pitchy>
       </pixel>
-      <position><x>-1.25</x><y>31.5546</y><z>-38.6257</z></position>
+      <position><x>-1.25</x><y>29.7869</y><z>-38.6257</z></position>
       <direction_xaxis><x>+1.0</x><y>0.0</y><z>0.0</z></direction_xaxis>
       <direction_yaxis><x>0.0</x><y>0.707107</y><z>0.707107</z></direction_yaxis>
       <energy_priority>anode</energy_priority> 

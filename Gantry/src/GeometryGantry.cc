@@ -195,7 +195,7 @@ G4LogicalVolume* GeometryGantry::Construct(std::string detname) {
   
   G4double DetectorModule_xPos = -(CdTe_DSD_xPos+1.25*mm);
   G4double DetectorModule_yPos = -(CdTe_DSD_yPos+1.25*mm)-5.0*mm;
-  G4double DetectorModule_zPos = DetectorModule_zSize*0.5 - (FECHolder_zSize + Ceramic_Spacer_zSize + FecKiban_zSize) - 50.0*mm ;
+  G4double DetectorModule_zPos = DetectorModule_zSize*0.5 - (FECHolder_zSize + Ceramic_Spacer_zSize + FecKiban_zSize) - 48.0*mm ;
   //  G4double DetectorModule_zPos = -50.0*mm - ((FECHolder_zSize + Ceramic_Spacer_zSize + FecKiban_zSize) -DetectorModule_zSize*0.5);
   for (int i = 0; i < 8; i++) {    
     G4ThreeVector pos = G4ThreeVector(DetectorModule_xPos,DetectorModule_yPos,DetectorModule_zPos);
