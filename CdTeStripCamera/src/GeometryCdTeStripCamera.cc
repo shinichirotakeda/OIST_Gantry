@@ -7,6 +7,7 @@
 #include "GeometryCollimatorType1.hh"
 #include "GeometryCollimatorType2.hh"
 #include "GeometryCollimatorPrototype.hh"
+#include "GeometryCollimatorPrototypeWO.hh"
 #include "GeometryCollimator_MuonType1.hh"
 #include "GeometryCollimator_MuonType2.hh"
 #include "GeometryCollimator_MuonType3.hh"
@@ -101,6 +102,8 @@ G4LogicalVolume* GeometryCdTeStripCamera::Construct(std::string detname) {
     Collimator_Geometry = new GeometryCollimator_MuonType6();
   }else if(detname == "Prototype"){
     Collimator_Geometry = new GeometryCollimatorPrototype();
+  }else if(detname == "PrototypeWO"){
+   Collimator_Geometry = new GeometryCollimatorPrototypeWO();
   }else{
     Collimator_Geometry = new GeometryCollimator();
   }

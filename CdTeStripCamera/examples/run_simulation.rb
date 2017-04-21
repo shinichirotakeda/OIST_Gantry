@@ -30,7 +30,7 @@ def run_simulation(num, random)
   sim.set_physics(hadron_hp: false, cut_value: 0.001)
 
   sim.set_geometry :CdTeStripCameraMainGeometry, {
-    "Collimator Name" => "Prototype",
+    "Collimator Name" => "PrototypeWO",
   }
   
   sim.set_primary_generator :PointSourcePrimaryGen, {
