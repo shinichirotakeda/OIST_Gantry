@@ -9,12 +9,12 @@ include OISTGantryGeometry
 def run_simulation(num, random)
   energy = 31.5 # keV
   posx = 0.0 #cm
-  posy = 0.0 #cm
+  posy = 10.0 #cm
   posz = 0.0 #cm
 
-  dirx = 0.0
+  dirx = 1.0
   diry = 0.0
-  dirz = -1.0
+  dirz = 0.0
 #  thetamax = 0.5
   thetamax = 0.0
   output = "vis_ene#{energy}_posx#{posx}cm_posy#{posy}cm_poz#{posz}cm_seed#{random}.root"
@@ -32,7 +32,7 @@ def run_simulation(num, random)
   sim.set_physics(hadron_hp: false, cut_value: 0.001)
 
   sim.set_geometry :GantryMainGeometry, {
-    "Collimator Name" => "Type1",
+    "Collimator Name" => "Type1PT",
   }  
   
   sim.set_primary_generator :PointSourcePrimaryGen, {

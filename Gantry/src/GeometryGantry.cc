@@ -5,6 +5,7 @@
 
 #include "GeometryCollimator.hh"
 #include "GeometryCollimatorType1.hh"
+#include "GeometryCollimatorType1PT.hh"
 
 #include "G4Material.hh"
 #include "G4NistManager.hh"
@@ -594,10 +595,12 @@ G4LogicalVolume* GeometryGantry::Construct(std::string detname) {
   GeometryCollimator* Collimator_Geometry;
   if(detname == "Type1"){
     Collimator_Geometry = new GeometryCollimatorType1();
+  }else if(detname == "Type1PT"){
+    Collimator_Geometry = new GeometryCollimatorType1PT();    
   }else{
     Collimator_Geometry = new GeometryCollimator();
   }
-
+  
   Collimator_Geometry->Construct(LocalWorld_Logical);
 
   return LocalWorld_Logical;
