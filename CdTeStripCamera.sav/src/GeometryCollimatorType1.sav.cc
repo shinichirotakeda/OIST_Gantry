@@ -1,0 +1,106 @@
+#include <sstream>
+
+#include "GeometryCollimatorType1.hh"
+
+#include "AHG4MaterialManager.hh"
+
+#include "G4Material.hh"
+#include "G4NistManager.hh"
+#include "G4PVPlacement.hh"
+#include "G4PVParameterised.hh"
+#include "G4LogicalVolume.hh"
+#include "G4VPhysicalVolume.hh"
+#include "G4Box.hh"
+#include "G4Tubs.hh"
+#include "G4Cons.hh"
+#include "G4SubtractionSolid.hh"
+#include "G4RotationMatrix.hh"
+#include "G4VisAttributes.hh"
+#include "G4Colour.hh"
+
+#include "G4UnionSolid.hh"
+
+using namespace cdtestripcamerageometry;
+
+G4LogicalVolume* GeometryCollimatorType1::Construct(G4ThreeVector *pos) {
+
+  const bool surfaceCheck = false;
+  G4double margin = 0.1*mm; 
+
+  AHG4MaterialManager* mmanager = AHG4MaterialManager::GetAHG4MaterialManager();
+  AHG4Material* air = mmanager->instantiate("Vacuum");	
+
+  std::string matname;
+  AHG4MaterialProperty* p;
+  matname = "AHG4SGD.Tungsten";
+  p = mmanager->RetrieveProperty("Tungsten");
+  mmanager->registerMaterial(matname, *p);
+  AHG4Material* tungsten = mmanager->instantiate(matname);
+
+
+  // Collimator //////////////////////
+
+  G4double Collimator_xSize = 20.0*mm;
+  G4double Collimator_ySize = 20.0*mm;
+  G4double Collimator_zSize = 10.0*mm;
+  G4VSolid* Collimator_Solid = new G4Box("Collimator_Solid", Collimator_xSize*0.5, Collimator_ySize*0.5, Collimator_zSize*0.5);
+  G4LogicalVolume* Collimator_Logical = new G4LogicalVolume(Collimator_Solid, tungsten, "Collimator_Logical");
+
+  G4double PinholeCone_Rmin1 = 0.0*mm; 
+  G4double PinholeCone_Rmax1 = 0.05*mm; 
+  G4double PinholeCone_Rmin2 = 0.0*mm; 
+  G4double PinholeCone_Rmax2 = 1.6*mm; 
+  G4double PinholeCone_Dz = 4.0*mm; 
+  G4double PinholeCone_SPhi = 0.0*deg;; 
+  G4double PinholeCone_DPhi = 360.0*deg;; 
+  G4VSolid* PinholeCone_up = new G4Cons("PinholeCone_up", PinholeCone_Rmin1,PinholeCone_Rmax1,PinholeCone_Rmin2,PinholeCone_Rmax2,PinholeCone_Dz,PinholeCone_SPhi,PinholeCone_DPhi);
+  G4VSolid* PinholeCone_down = new G4Cons("PinholeCone_down", PinholeCone_Rmin1,PinholeCone_Rmax1,PinholeCone_Rmin2,PinholeCone_Rmax2,PinholeCone_Dz,PinholeCone_SPhi,PinholeCone_DPhi);
+
+  G4RotationMatrix yRot180deg;
+  yRot180deg.rotateY(180.*degree);
+  G4ThreeVector  translation(0, 0, -2.0*PinholeCone_Dz);
+  G4UnionSolid *Pinhole = new G4UnionSolid("Pinhole",PinholeCone_up,PinholeCone_down,&yRot180deg,translation);
+  G4LogicalVolume* Pinhole_logical = new G4LogicalVolume(Pinhole, air, "Pinhole_Logical");
+
+  G4ThreeVector p1(-5.45*mm,5.45*mm,PinholeCone_Dz);
+  G4ThreeVector p2(0,5.45*mm,PinholeCone_Dz);
+  G4ThreeVector p3(5.45*mm,5.45*mm,PinholeCone_Dz);
+  G4ThreeVector p4(-5.45*mm,0,PinholeCone_Dz);
+  G4ThreeVector p5(0,0,PinholeCone_Dz);
+  G4ThreeVector p6(5.45*mm,0,PinholeCone_Dz);
+  G4ThreeVector p7(-5.45*mm,-5.45*mm,PinholeCone_Dz);
+  G4ThreeVector p8(0,-5.45*mm,PinholeCone_Dz);
+  G4ThreeVector p9(5.45*mm,-5.45*mm,PinholeCone_Dz);
+
+  G4ThreeVector pf(0,0,25.*mm);
+  G4ThreeVector a;
+
+
+  a = pf-p1;
+  G4RotationMatrix rot_p1;
+  rot_p1.rotateY(a.phi());rot_p1.rotateZ(a.theta());
+
+  a= pf-p5;
+  G4RotationMatrix rot_p5;
+  rot_p5.rotateY(a.phi());rot_p5.rotateZ(a.theta());
+  
+  new G4PVPlacement(G4Transform3D(rot_p1, p1), Pinhole_logical, "PinholeCollimatorP1", Collimator_Logical, false, 0, surfaceCheck);
+  //  new G4PVPlacement(0, p2, Pinhole_logical, "PinholeCollimatorP2", Collimator_Logical, false, 0, surfaceCheck);
+  //  new G4PVPlacement(0, p3, Pinhole_logical, "PinholeCollimatorP3", Collimator_Logical, false, 0, surfaceCheck);
+  //  new G4PVPlacement(0, p4, Pinhole_logical, "PinholeCollimatorP4", Collimator_Logical, false, 0, surfaceCheck);
+  new G4PVPlacement(G4Transform3D(rot_p5, p5), Pinhole_logical, "PinholeCollimatorP5", Collimator_Logical, false, 0, surfaceCheck);
+  //  new G4PVPlacement(0, p6, Pinhole_logical, "PinholeCollimatorP6", Collimator_Logical, false, 0, surfaceCheck);
+  //  new G4PVPlacement(0, p7, Pinhole_logical, "PinholeCollimatorP7", Collimator_Logical, false, 0, surfaceCheck);
+  //  new G4PVPlacement(0, p8, Pinhole_logical, "PinholeCollimatorP8", Collimator_Logical, false, 0, surfaceCheck);
+  //  new G4PVPlacement(0, p9, Pinhole_logical, "PinholeCollimatorP9", Collimator_Logical, false, 0, surfaceCheck);
+  
+  G4VisAttributes* Collimator_Attributes = new G4VisAttributes(G4Colour::Red());
+  Collimator_Attributes->SetForceSolid(surfaceCheck);
+  Collimator_Logical->SetVisAttributes(Collimator_Attributes);
+  
+  pos->setX(0.);
+  pos->setY(0.);
+  pos->setZ(30.0*mm);
+  return Collimator_Logical;
+ 
+}

@@ -8,7 +8,6 @@
 #include "GeometryCollimatorType2.hh"
 #include "GeometryCollimatorPrototype.hh"
 #include "GeometryCollimatorPrototypeWO.hh"
-#include "GeometryCollimatorTORAY1.hh"
 #include "GeometryCollimator_MuonType1.hh"
 #include "GeometryCollimator_MuonType2.hh"
 #include "GeometryCollimator_MuonType3.hh"
@@ -35,7 +34,6 @@ using namespace cdtestripcamerageometry;
 G4LogicalVolume* GeometryCdTeStripCamera::Construct(std::string detname) {
 
   const bool surfaceCheck = false;
-  //const bool surfaceCheck = true;
   G4double margin = 0.1*mm;  
 
   AHG4MaterialManager* mmanager = AHG4MaterialManager::GetAHG4MaterialManager();
@@ -106,48 +104,13 @@ G4LogicalVolume* GeometryCdTeStripCamera::Construct(std::string detname) {
     Collimator_Geometry = new GeometryCollimatorPrototype();
   }else if(detname == "PrototypeWO"){
    Collimator_Geometry = new GeometryCollimatorPrototypeWO();
-  }else if(detname == "TORAY1"){
-   Collimator_Geometry = new GeometryCollimatorTORAY1();
   }else{
     Collimator_Geometry = new GeometryCollimator();
   }
 
   G4ThreeVector Collimator_postion = G4ThreeVector(0,0,0);  
   G4LogicalVolume* Collimator_Logical = Collimator_Geometry->Construct(&Collimator_postion);
+  new G4PVPlacement(0, Collimator_postion, Collimator_Logical, "Collimator", LocalWorld_Logical, false, 0, surfaceCheck);
 
-  if(detname == "TORAY1"){
-    double a0 = 0.4330127*mm;
-    double d0 = 0.16*mm;
-    int imax=5;
-    int jmax=5;
-    
-    double offset_x = -(2.0*a0+d0)*((double)imax-1.0)/2.0;
-    double offset_y = -(a0+d0/2.0)/0.57735027*((double)jmax-1.0)/2.0;
-
-    double pitch_x = -offset_x*2.0;
-    double pitch_y = -offset_y*2.0;
-
-    double s_x = 0.0*mm-3.0*pitch_x-pitch_x/2.0;
-    double s_y = 0.0*mm-4.0*pitch_y;
-    
-    G4double Collimator_pz = 5.0*mm;
-    G4ThreeVector pos;
-
-    for(int i=0;i<8;i++){
-      for(int j=0;j<9;j++){
-	std::string name = "Collimator"+std::to_string(i)+std::to_string(j);
-	pos.setX(s_x+i*pitch_x);
-	pos.setY(s_y+j*pitch_y);
-	pos.setZ(Collimator_pz+1.0*mm);
-
-	new G4PVPlacement(0, pos, Collimator_Logical, name, LocalWorld_Logical, false, 0, surfaceCheck);
-      }
-    }
-
-
-  }else{
-    new G4PVPlacement(0, Collimator_postion, Collimator_Logical, "Collimator", LocalWorld_Logical, false, 0, surfaceCheck);
-  }
-    
   return LocalWorld_Logical;
 }
