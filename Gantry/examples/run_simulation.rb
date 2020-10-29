@@ -29,7 +29,7 @@ def run_simulation(num, random)
   sim.set_physics(hadron_hp: false, cut_value: 0.001)
 
   sim.set_geometry :GantryMainGeometry, {
-    "Collimator Name" => "Type1",
+    "Collimator Name" => "Type1PT",
   }  
   sim.set_primary_generator :PointSourcePrimaryGen, {
     particle: "gamma",
