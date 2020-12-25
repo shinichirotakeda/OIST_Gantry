@@ -1,0 +1,2 @@
+/Users/takeda/lib/libCdTeStripCameraGeometry.dylib
+/Users/takeda/lib/ruby/cdTeStripCameraGeometry.bundle
